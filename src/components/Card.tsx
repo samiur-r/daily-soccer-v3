@@ -1,24 +1,6 @@
+import { DataType } from "@/types/data";
 import Image from "next/image";
 import React from "react";
-
-interface DataType {
-  Competition: {
-    Name: string;
-  };
-  LocalTeam: {
-    Name: string;
-    Image: string;
-  };
-  AwayTeam: {
-    Name: string;
-    Image: string;
-  };
-  Date: string;
-  Channels: Array<{
-    Name: string;
-    Image: string;
-  }>;
-}
 
 interface CardProps {
   data: Array<DataType>;
