@@ -4,11 +4,12 @@ import path from "path";
 import useStore from "@/store";
 
 export async function GET(req: Request) {
+  console.log("here");
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page") as string;
 
   try {
-    const cachedData = useStore.getState().data;
+    let cachedData = useStore.getState().data;
 
     if (!cachedData || parseInt(page, 10) !== useStore.getState().currentPage) {
       const filePath = path.resolve("./data.json");
@@ -18,11 +19,14 @@ export async function GET(req: Request) {
         data,
         currentPage: parseInt(page),
       });
+      cachedData = data;
     }
 
     const startIdx = (parseInt(page, 10) - 1) * 10;
     const endIdx = startIdx + 10;
-    const paginatedData: any = cachedData.slice(startIdx, endIdx);
+    const paginatedData: any = JSON.stringify(
+      cachedData.slice(startIdx, endIdx)
+    );
 
     return new Response(paginatedData, { status: 200 });
   } catch (error: any) {

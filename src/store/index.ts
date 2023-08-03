@@ -16,10 +16,10 @@ const useStore = create<StoreState & StoreActions>()(
   persist(
     (set, get) => ({
       data: [],
-      currentPage: 1,
+      currentPage: 0,
 
       fetchNextPage: async () => {
-        const page = get().currentPage
+        const page = get().currentPage;
         const response = await fetch(
           `http://localhost:3000/api/data?page=${page + 1}`
         );
@@ -38,7 +38,7 @@ const useStore = create<StoreState & StoreActions>()(
     }),
     {
       name: "store",
-      storage: undefined,
+      getStorage: () => localStorage,
     }
   )
 );
