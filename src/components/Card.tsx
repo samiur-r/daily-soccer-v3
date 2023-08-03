@@ -27,7 +27,7 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <div className="flex max-w-4xl shadow-lg border">
-      <div className="w-5 bg-emerald-700" />
+      <div className="w-3 bg-emerald-700" />
       <div className="p-5 flex-1">
         <p className="flex justify-end text-xs md:text-base">Manana 18:00</p>
         <h3 className="text-sm md:text-xl font-semibold italic">
