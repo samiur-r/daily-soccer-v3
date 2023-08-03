@@ -8,6 +8,8 @@ interface StoreState {
 }
 
 type StoreActions = {
+  setCurrentPage: (page: number) => void;
+  setData: (data: DataType[]) => void;
   fetchNextPage: () => void;
   revalidate: () => void;
 };
@@ -18,6 +20,16 @@ const useStore = create<StoreState & StoreActions>()(
       data: [],
       currentPage: 0,
 
+      setCurrentPage: (page: number) => {
+        set(() => ({
+          currentPage: page,
+        }));
+      },
+      setData: (data: DataType[]) => {
+        set(() => ({
+          data: data,
+        }));
+      },
       fetchNextPage: async () => {
         const page = get().currentPage;
         const response = await fetch(
