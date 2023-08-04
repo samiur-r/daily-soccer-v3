@@ -45,7 +45,7 @@ export default function Home() {
     const ws = new WebSocket(
       process.env.NEXT_PUBLIC_ENV === "development"
         ? `ws://localhost:3000`
-        : `ws://${process.env.NEXT_PUBLIC_API_DOMAIN}`
+        : `wss://${process.env.NEXT_PUBLIC_API_DOMAIN}`
     );
 
     ws.onmessage = (event) => {
