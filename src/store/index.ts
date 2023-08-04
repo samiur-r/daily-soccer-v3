@@ -46,7 +46,7 @@ const useStore = create<StoreState & StoreActions>()(
         }));
         const page = get().currentPage;
         const response = await fetch(
-          `http://localhost:3000/api/matches?page=${page + 1}`
+          `/api/matches?page=${page + 1}`
         );
         const { data: newData } = await response.json();
         set((state) => ({

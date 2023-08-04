@@ -42,7 +42,11 @@ export default function Home() {
   }, [matchList]);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:3000");
+    const ws = new WebSocket(
+      process.env.NEXT_PUBLIC_ENV === "development"
+        ? `ws://localhost:3000`
+        : `ws://${process.env.NEXT_PUBLIC_API_DOMAIN}`
+    );
 
     ws.onmessage = (event) => {
       try {
