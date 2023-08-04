@@ -1,9 +1,9 @@
-import axios from "axios";
+const axios = require("axios");
 
 let previousTimestamp = null;
 
 const checkFileModification = async () => {
-  console.log('Running schedule task to detect json file change')
+  console.log("Running schedule task to detect json file change");
   try {
     const response = await axios.head(process.env.NEXT_PUBLIC_JSON_URL);
     const currentTimestamp = response.headers["last-modified"];
