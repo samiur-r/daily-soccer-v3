@@ -17,6 +17,7 @@ export default function Home() {
     setCurrentPage,
     setTotalItems,
     setMatches,
+    revalidate,
   } = useStore();
 
   const [matchList, setMatchList] = useState<MatchType[]>([]);
@@ -46,7 +47,7 @@ export default function Home() {
     eventSource.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (data.type === "file_change") {
-        console.log("File changed:");
+        revalidate();
       }
     };
 

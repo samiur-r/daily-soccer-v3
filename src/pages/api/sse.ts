@@ -1,6 +1,8 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+
 import detectFileChange from "@/utils/detectFileChange";
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.headers.accept && req.headers.accept === "text/event-stream") {
     res.setHeader("Content-Type", "text/event-stream");
     res.setHeader("Cache-Control", "no-cache");
