@@ -1,4 +1,5 @@
 "use client";
+
 import Card from "@/components/Card";
 import useStore from "@/store";
 import { MatchType } from "@/types/match";

@@ -8,7 +8,7 @@ export async function GET(req: Request) {
 
   try {
     // const filePath = path.resolve("./matches.json");
-    // const matches = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    // const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     const { data } = await axios.get(
       process.env.NEXT_PUBLIC_JSON_URL as string
     );
