@@ -2,6 +2,8 @@ const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
 const cron = require("node-cron");
+const WebSocket = require("ws");
+
 const detectFileChange = require("./src/utils/detectFileChange");
 
 const dev = process.env.NODE_ENV !== "production";
@@ -11,12 +13,23 @@ const port = 3000;
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-cron.schedule("*/30 * * * *", () => {
-  detectFileChange();
+let wsServer;
+
+const sendNotificationToClients = () => {
+  wsServer.clients.forEach((client) => {
+    if (client.readyState === WebSocket.OPEN) {
+      client.send(JSON.stringify({ type: "file_change" }));
+    }
+  });
+};
+
+cron.schedule("*/30 * * * *", async () => {
+  const isFileChanged = await detectFileChange();
+  if (isFileChanged) sendNotificationToClients();
 });
 
 app.prepare().then(() => {
-  createServer(async (req, res) => {
+  const server = createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true);
       const { pathname, query } = parsedUrl;
@@ -33,12 +46,20 @@ app.prepare().then(() => {
       res.statusCode = 500;
       res.end("internal server error");
     }
-  })
-    .once("error", (err) => {
-      console.error(err);
-      process.exit(1);
-    })
-    .listen(port, () => {
-      console.log(`> Ready on http://${hostname}:${port}`);
-    });
+  });
+
+  wsServer = new WebSocket.Server({ server });
+
+  wsServer.on("connection", (ws) => {
+    console.log("WebSocket client connected");
+  });
+
+  server.once("error", (err) => {
+    console.error(err);
+    process.exit(1);
+  });
+
+  server.listen(port, () => {
+    console.log(`> Ready on http://${hostname}:${port}`);
+  });
 });
