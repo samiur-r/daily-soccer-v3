@@ -1,4 +1,5 @@
-export interface DataType {
+export interface MatchType {
+  Id: string;
   Competition: {
     Name: string;
   };
@@ -12,6 +13,7 @@ export interface DataType {
   };
   Date: string;
   Channels: Array<{
+    Id: string;
     Name: string;
     Image: string;
   }>;

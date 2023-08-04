@@ -1,15 +1,18 @@
-import { DataType } from "@/types/data";
+import { MatchType } from "@/types/match";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 interface StoreState {
-  data: Array<DataType>;
+  matches: Array<MatchType>;
   currentPage: number;
+  totalItems: number;
+  isLoading: boolean;
 }
 
 type StoreActions = {
   setCurrentPage: (page: number) => void;
-  setData: (data: DataType[]) => void;
+  setTotalItems: (count: number) => void;
+  setMatches: (matches: MatchType[]) => void;
   fetchNextPage: () => void;
   revalidate: () => void;
 };
@@ -17,35 +20,43 @@ type StoreActions = {
 const useStore = create<StoreState & StoreActions>()(
   persist(
     (set, get) => ({
-      data: [],
+      matches: [],
       currentPage: 0,
+      totalItems: 0,
+      isLoading: false,
 
       setCurrentPage: (page: number) => {
         set(() => ({
           currentPage: page,
         }));
       },
-      setData: (data: DataType[]) => {
+      setTotalItems: (count: number) => {
         set(() => ({
-          data: data,
+          totalItems: count,
+        }));
+      },
+      setMatches: (matches: MatchType[]) => {
+        set(() => ({
+          matches: matches,
         }));
       },
       fetchNextPage: async () => {
+        set(() => ({
+          isLoading: true,
+        }));
         const page = get().currentPage;
         const response = await fetch(
-          `http://localhost:3000/api/data?page=${page + 1}`
+          `http://localhost:3000/api/matches?page=${page + 1}`
         );
         const { data: newData } = await response.json();
         set((state) => ({
-          data: [...state.data, ...newData],
+          matches: [...state.matches, ...JSON.parse(newData)],
           currentPage: state.currentPage + 1,
+          isLoading: false,
         }));
       },
-
-      revalidate: async () => {
-        const response = await fetch("http://localhost:3000/api/data?page=1");
-        const { data } = await response.json();
-        set({ data, currentPage: 1 });
+      revalidate: () => {
+        set({ matches: [], currentPage: 0, totalItems: 0 });
       },
     }),
     {

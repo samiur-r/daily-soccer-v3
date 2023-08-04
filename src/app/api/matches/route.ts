@@ -6,14 +6,17 @@ export async function GET(req: Request) {
   const page = searchParams.get("page") as string;
 
   try {
-    const filePath = path.resolve("./data.json");
-    const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    const filePath = path.resolve("./matches.json");
+    const matches = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+    const totalItems = matches.length;
 
     const startIdx = (parseInt(page, 10) - 1) * 10;
     const endIdx = startIdx + 10;
-    const paginatedData: any = JSON.stringify(data.slice(startIdx, endIdx));
+    const paginatedData: any = JSON.stringify(matches.slice(startIdx, endIdx));
 
-    return new Response(paginatedData, { status: 200 });
+    const response = JSON.stringify({ data: paginatedData, totalItems });
+
+    return new Response(response, { status: 200 });
   } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }
