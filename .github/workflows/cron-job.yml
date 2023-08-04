@@ -1,0 +1,23 @@
+name: Cron Job
+
+on:
+  schedule:
+    - cron: "*/1 * * * *" # Cron expression to run every hour
+
+jobs:
+  run_cron_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+
+      - name: Run file modification check
+        run: |
+          npm install
+          node src/utils/detectFileChange.js
