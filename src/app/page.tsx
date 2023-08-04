@@ -41,20 +41,20 @@ export default function Home() {
     else setRenderShowMoreBtn(false);
   }, [matchList]);
 
-  useEffect(() => {
-    const eventSource = new EventSource("/api/sse");
+  // useEffect(() => {
+  //   const eventSource = new EventSource("/api/sse");
 
-    eventSource.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === "file_change") {
-        revalidate();
-      }
-    };
+  //   eventSource.onmessage = (event) => {
+  //     const data = JSON.parse(event.data);
+  //     if (data.type === "file_change") {
+  //       revalidate();
+  //     }
+  //   };
 
-    return () => {
-      eventSource.close();
-    };
-  }, []);
+  //   return () => {
+  //     eventSource.close();
+  //   };
+  // }, []);
 
   return (
     <main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80 max-w-5xl">

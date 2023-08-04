@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/detectFileChange.js", "src/app/api/sse2/sseManager.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/utils/detectFileChange.js", "src/app/api/sse2/sseManager.js", "server.js"],
   "exclude": ["node_modules"]
 }
