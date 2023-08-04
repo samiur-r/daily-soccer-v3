@@ -40,8 +40,23 @@ export default function Home() {
     else setRenderShowMoreBtn(false);
   }, [matchList]);
 
+  useEffect(() => {
+    const eventSource = new EventSource("/api/sse");
+
+    eventSource.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "file_change") {
+        console.log("File changed:");
+      }
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
+
   return (
-    <main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80">
+    <main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80 max-w-5xl">
       {matchList.map((match: MatchType) => (
         <Card key={match.Id} data={match} />
       ))}

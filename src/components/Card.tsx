@@ -8,7 +8,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
-    <div className="flex max-w-4xl shadow-lg border">
+    <div className="flex shadow-lg border">
       <div className="w-3 bg-emerald-700" />
       <div className="p-5 flex-1">
         <p className="flex justify-end text-xs md:text-base">
