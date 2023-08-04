@@ -15,10 +15,6 @@
 ```
 git clone https://github.com/randyesperben/camps.git
 cd camps
-
-cp .env.example env.local 
-Open the env.local file and add values to the environment variables.
-
 yarn install
 yarn run dev
 ```
