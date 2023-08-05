@@ -4,9 +4,24 @@ import Card from "@/components/Card";
 import useStore from "@/store";
 import { MatchType } from "@/types/match";
 import { useEffect, useState } from "react";
-import { Analytics } from '@vercel/analytics/react';
+
+import { Popover } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon, ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+
+const navigation = [
+  { name: 'Competition 1', href: '#', icon: ArrowRightIcon, current: true },
+  { name: 'Competition 2', href: '#', icon: ArrowRightIcon, current: false },
+  { name: 'Competition 3', href: '#', icon: ArrowRightIcon, current: false },
+  { name: 'Competition 4', href: '#', icon: ArrowRightIcon, current: false },
+  { name: 'Competition 5', href: '#', icon: ArrowRightIcon, current: false },
+  { name: 'Competition 6', href: '#', icon: ArrowRightIcon, current: false },
+]
 
 const fetchData = (url: string) => fetch(url).then((res) => res.json());
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export default function Home() {
   const {
@@ -59,11 +74,126 @@ export default function Home() {
   }, []);
 
   return (
-    <><main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80 max-w-5xl">
-      {matchList.map((match: MatchType) => (
-        <Card key={match.Id} data={match} />
-      ))}
-      {renderShowMoreBtn && (
+    <div className="min-h-screen bg-gray-100">
+      <Popover
+        as="header"
+        className={({ open }) =>
+          classNames(
+            open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
+            'sticky top-0 bg-white shadow-sm lg:overflow-y-visible'
+          )
+        }
+      >
+        {({ open }) => (
+          <>
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="relative flex justify-between lg:gap-8 xl:grid xl:grid-cols-12">
+                <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
+                  <div className="flex flex-shrink-0 items-center">
+                    <a href="#">
+                      <img
+                        className="block h-8 w-auto"
+                        src="https://dummyimage.com/100x32/000/fff.jpg&text=Logo"
+                        alt="Logo"
+                      />
+                    </a>
+                  </div>
+                </div>
+                <div className="min-w-0 flex-1 md:px-8 lg:px-0 xl:col-span-6">
+                  <div className="flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
+                    <div className="w-full">
+                      <label htmlFor="search" className="sr-only">
+                        Search match
+                      </label>
+                      <div className="relative">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                        </div>
+                        <input
+                          id="search"
+                          name="search"
+                          className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                          placeholder="Search match"
+                          type="search"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center md:absolute md:inset-y-0 md:right-0 lg:hidden">
+                  {/* Mobile menu button */}
+                  <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                    <span className="sr-only">Open menu</span>
+                    {open ? (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    )}
+                  </Popover.Button>
+                </div>
+                <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
+                  <a
+                    href="#"
+                    className="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                  </a>
+
+                </div>
+              </div>
+            </div>
+
+            <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
+              <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    aria-current={item.current ? 'page' : undefined}
+                    className={classNames(
+                      item.current ? 'bg-gray-100 text-gray-900' : 'hover:bg-gray-50',
+                      'block rounded-md py-2 px-3 text-base font-medium'
+                    )}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </Popover.Panel>
+          </>
+        )}
+      </Popover>
+
+      <div className="py-6">
+        <div className="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
+          <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
+            <nav className="sticky top-24 space-y-1" aria-label="Sidebar">
+              {navigation.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className={classNames(
+                    item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                    'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
+                  )}
+                  aria-current={item.current ? 'page' : undefined}
+                >
+                  <item.icon
+                    className={classNames(
+                      item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                      'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
+                    )}
+                    aria-hidden="true"
+                  />
+                  <span className="truncate">{item.name}</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+          <main className="lg:col-span-9 xl:col-span-6">
+            {matchList.map((match: MatchType) => (
+              <Card key={match.Id} data={match} />
+            ))}
+             {renderShowMoreBtn && (
         <button
           className="max-w-max mx-auto mt-5 flex gap-3 items-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
           onClick={fetchNextPage}
@@ -102,6 +232,12 @@ export default function Home() {
           Load More
         </button>
       )}
-    </main><Analytics /></>
+            </main>
+          <aside className="hidden xl:col-span-4 xl:block">
+            <div className="sticky top-24 space-y-4">Right sidebar</div>
+          </aside>
+        </div>
+      </div>
+    </div>
   );
 }
