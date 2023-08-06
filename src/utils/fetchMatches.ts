@@ -1,5 +1,7 @@
 const fetchMatches = async (page: number) => {
-  const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string);
+  const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string, {
+    cache: "no-store",
+  });
   const matches = await res.json();
   const totalItems = matches.length;
 
