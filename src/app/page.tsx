@@ -1,21 +1,17 @@
 import MatchList from "@/components/MatchList";
+import fetchMatches from "@/utils/fetchMatches";
 
 const getMatches = async () => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/api/matches?page=1`,
-    {
-      next: {
-        revalidate: 60,
-      },
-      cache: 'no-store'
-    }
-  );
-  const result = await res.json();
-  return { matches: result.data, totalItems: result.totalItems };
+  try {
+    const response = await fetchMatches(1);
+    return response;
+  } catch (error: any) {
+    console.log(error);
+  }
 };
 
 export default async function Home() {
-  const { matches, totalItems } = await getMatches();
+  const { matches, totalItems }: any = await getMatches();
 
   return (
     <main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80 max-w-5xl">
