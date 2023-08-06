@@ -1,16 +1,12 @@
 import axios from "axios";
-// import fs from "fs";
-// import path from "path";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page") as string;
 
   try {
-    // const filePath = path.resolve("./matches.json");
-    // const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
     const { data } = await axios.get(
-      "https://dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb.s3.eu-west-1.amazonaws.com/events_y473sycnsryug46z7vbw4xhjc2238pq2nzicw5vh6h8gypgzaw.json"
+      process.env.NEXT_PUBLIC_JSON_URL as string
     );
     const totalItems = data.length;
 
