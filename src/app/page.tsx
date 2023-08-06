@@ -7,6 +7,7 @@ const getMatches = async () => {
       next: {
         revalidate: 60,
       },
+      cache: 'no-store'
     }
   );
   const result = await res.json();
