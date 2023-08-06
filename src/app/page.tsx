@@ -14,7 +14,7 @@ export default async function Home() {
   const { matches, totalItems }: any = await getMatches();
 
   return (
-    <main className="flex flex-col gap-5 min-h-screen py-10 m-3 md:ml-80 max-w-5xl">
+    <main className="flex justify-center min-h-screen py-10 m-3">
       <MatchList matches={matches} totalItems={totalItems} />
     </main>
   );

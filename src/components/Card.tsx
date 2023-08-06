@@ -1,6 +1,8 @@
-import { MatchType } from "@/types/match";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
+import { MatchType } from "@/types/match";
+import formatDate from "@/utils/formatDate";
 
 interface CardProps {
   data: MatchType;
@@ -12,7 +14,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
       <div className="w-3 bg-emerald-700" />
       <div className="p-5 flex-1">
         <p className="flex justify-end text-xs md:text-base">
-          Manana {data.Date ? new Date(data.Date).toLocaleString() : ""}
+          {formatDate(data.Date)}
         </p>
         <h3 className="text-sm md:text-xl font-semibold italic">
           {data.Competition.Name}
@@ -36,12 +38,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
             ))}
         </div>
         <div className="flex gap-2 md:justify-end mt-5">
-          <Image
-            src="/moviestar.png"
-            width={80}
-            height={45}
-            alt="icon"
-          />
+          <Image src="/moviestar.png" width={80} height={45} alt="icon" />
         </div>
       </div>
     </div>

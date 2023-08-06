@@ -30,7 +30,7 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
   };
 
   return (
-    <div>
+    <div className="flex-1 w-full max-w-5xl">
       {matchList.map((match: MatchType) => (
         <Card key={match.Id} data={match} />
       ))}
