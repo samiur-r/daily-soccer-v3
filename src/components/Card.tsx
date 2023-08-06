@@ -13,7 +13,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     <div className="flex shadow-lg border">
       <div className="w-3 bg-emerald-700" />
       <div className="p-5 flex-1">
-        <p className="flex justify-end text-xs md:text-base">
+        <p className="flex justify-end text-xs md:text-base" suppressHydrationWarning>
           {formatDate(data.Date)}
         </p>
         <h3 className="text-sm md:text-xl font-semibold italic">
