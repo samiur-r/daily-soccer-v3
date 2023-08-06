@@ -5,12 +5,11 @@ export async function GET(req: Request) {
   try {
     const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string);
     const data = await res.json();
-    console.log(data)
     const totalItems = data.length;
 
     const startIdx = (parseInt(page, 10) - 1) * 10;
     const endIdx = startIdx + 10;
-    const paginatedData: any = JSON.stringify(data.slice(startIdx, endIdx));
+    const paginatedData: any = data.slice(startIdx, endIdx);
 
     const response = JSON.stringify({ data: paginatedData, totalItems });
 

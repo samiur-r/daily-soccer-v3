@@ -21,7 +21,7 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/matches?page=${currentPage + 1}`
       );
       const result = await res.json();
-      setMatchList([...matchList, ...JSON.parse(result.data)]);
+      setMatchList([...matchList, ...result.data]);
       setCurrentPage((prev) => prev + 1);
     } catch (error) {
       console.log(error);

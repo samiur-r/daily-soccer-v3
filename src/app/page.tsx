@@ -10,7 +10,7 @@ const getMatches = async () => {
     }
   );
   const result = await res.json();
-  return { matches: JSON.parse(result.data), totalItems: result.totalItems };
+  return { matches: result.data, totalItems: result.totalItems };
 };
 
 export default async function Home() {
