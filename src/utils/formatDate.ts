@@ -10,6 +10,7 @@ const formatDate = (dateString: string) => {
 
   if (timeDifferenceMinutes <= 0 && timeDifferenceMinutes >= -90)
     return "IN PLAY";
+  else if (timeDifferenceMinutes < -90) return "FINISHED";
   else if (timeDifferenceMinutes > 0 && timeDifferenceMinutes <= 1440)
     return "TOMORROW " + matchDate.toFormat("HH:mm");
   else if (now.hasSame(matchDate, "day"))
