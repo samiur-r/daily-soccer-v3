@@ -1,63 +1,28 @@
+import { DateTime } from "luxon";
+
 const formatDate = (dateString: string) => {
-  const madridOffset = 2;
-  const date = new Date(dateString);
-  const now = new Date();
+  const matchDate = DateTime.fromISO(dateString, { zone: "utc" }).setZone(
+    "Europe/Madrid"
+  );
+  const now = DateTime.utc().setZone("Europe/Madrid");
 
-  date.setHours(date.getHours() + madridOffset);
-  now.setHours(now.getHours() + madridOffset);
+  const timeDifferenceMinutes = matchDate.diff(now, "minutes").minutes;
 
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const months = [
-    "Jan.",
-    "Feb.",
-    "Mar.",
-    "Apr.",
-    "May",
-    "Jun.",
-    "Jul.",
-    "Aug.",
-    "Sep.",
-    "Oct.",
-    "Nov.",
-    "Dec.",
-  ];
-
-  if (date.toDateString() === now.toDateString()) {
-    const timeDifference = Math.floor(
-      (date.getTime() - now.getTime()) / (1000 * 60)
-    );
-    if (timeDifference <= 90) {
-      return "IN PLAY";
-    } else {
-      const hours = String(date.getHours()).padStart(2, "0");
-      const minutes = String(date.getMinutes()).padStart(2, "0");
-      return `TODAY ${hours}:${minutes}`;
-    }
+  if (timeDifferenceMinutes <= 0 && timeDifferenceMinutes >= -90) {
+    return "IN PLAY";
+  } else if (timeDifferenceMinutes > 0 && timeDifferenceMinutes <= 1440) {
+    // Tomorrow
+    return "TOMORROW " + matchDate.toFormat("HH:mm");
+  } else if (now.hasSame(matchDate, "day")) {
+    // Today
+    return "TODAY " + matchDate.toFormat("HH:mm");
+  } else if (timeDifferenceMinutes > 1440 && timeDifferenceMinutes <= 4320) {
+    // Within the next 3 days
+    return matchDate.toFormat("EEEE, MMM. d, HH:mm");
+  } else {
+    // After 3 days, display the full date
+    return matchDate.toFormat("EEEE, MMM. d, HH:mm");
   }
-
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  tomorrow.setHours(tomorrow.getHours() + madridOffset);
-  if (date.toDateString() === tomorrow.toDateString()) {
-    const hours = String(date.getHours()).padStart(2, "0");
-    const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `TOMORROW ${hours}:${minutes}`;
-  }
-
-  const dayName = days[date.getDay()];
-  const monthName = months[date.getMonth()];
-  const dayOfMonth = date.getDate();
-  const hours = String(date.getHours()).padStart(2, "0");
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  return `${dayName}, ${monthName} ${dayOfMonth}, ${hours}:${minutes}`;
 };
 
 export default formatDate;
