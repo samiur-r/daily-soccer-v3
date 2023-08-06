@@ -1,13 +1,11 @@
-import axios from "axios";
-
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const page = searchParams.get("page") as string;
 
   try {
-    const { data } = await axios.get(
-      process.env.NEXT_PUBLIC_JSON_URL as string
-    );
+    const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string);
+    const data = await res.json();
+    console.log(data)
     const totalItems = data.length;
 
     const startIdx = (parseInt(page, 10) - 1) * 10;
