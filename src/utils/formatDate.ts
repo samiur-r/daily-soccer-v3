@@ -7,8 +7,11 @@ const formatDate = (dateString: string) => {
 
   const now = DateTime.utc().setZone("Europe/Madrid");
 
-  const timeDifferenceMinutes = matchDate.diff(now, "minutes").minutes;
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
+  // const timeDifferenceMinutes = matchDate.diff(now, "minutes").minutes;
   // if (timeDifferenceMinutes >= 0 && timeDifferenceMinutes <= 90)
   //   return "IN PLAY";
   // else if (now.hasSame(matchDate, "day"))
@@ -19,14 +22,15 @@ const formatDate = (dateString: string) => {
 
   if (matchDate.hasSame(now, "day")) {
     if (matchDate.diff(now, "minutes").minutes <= 90) {
-      return "IN PLAY";
+      return "En juego";
     } else {
-      return `TODAY ${matchDate.toFormat("HH:mm")}`;
+      return `Hoy ${matchDate.toFormat("HH:mm")}`;
     }
   } else if (matchDate.hasSame(now.plus({ days: 1 }), "day")) {
-    return `TOMORROW ${matchDate.toFormat("HH:mm")}`;
+    return `Mañana ${matchDate.toFormat("HH:mm")}`;
   } else {
-    return matchDate.toFormat("EEEE, LLL. d, HH:mm");
+    const formattedDate = matchDate.toFormat("EEEE d MMM. HH:mm");
+    return capitalizeFirstLetter(formattedDate);
   }
 };
 
