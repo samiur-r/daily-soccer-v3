@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
                 src={`/img/${channel.Image}`}
                 width={32}
                 height={32}
-                alt="icon" />
+                alt={channel.Name} />
             ))}
         </div>
         <div className="flex gap-2 md:justify-end mt-5">
