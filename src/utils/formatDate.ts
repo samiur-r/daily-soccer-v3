@@ -3,19 +3,25 @@ import { DateTime } from "luxon";
 const formatDate = (dateString: string) => {
   const matchDate = DateTime.fromISO(dateString, { zone: "utc" }).setZone(
     "Europe/Madrid"
-  );
+  ).setLocale('es');
+
   const now = DateTime.utc().setZone("Europe/Madrid");
+
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   if (matchDate.hasSame(now, "day")) {
     if (matchDate.diff(now, "minutes").minutes <= 90) {
-      return "IN PLAY";
+      return "En juego";
     } else {
-      return `TODAY ${matchDate.toFormat("HH:mm")}`;
+      return `Hoy ${matchDate.toFormat("HH:mm")}`;
     }
   } else if (matchDate.hasSame(now.plus({ days: 1 }), "day")) {
-    return `TOMORROW ${matchDate.toFormat("HH:mm")}`;
+    return `Mañana ${matchDate.toFormat("HH:mm")}`;
   } else {
-    return matchDate.toFormat("EEEE, LLL. d, HH:mm");
+    const formattedDate = matchDate.toFormat("EEEE d MMM. HH:mm");
+    return capitalizeFirstLetter(formattedDate);
   }
 };
 
