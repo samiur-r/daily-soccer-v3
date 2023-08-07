@@ -1,17 +1,16 @@
-import { Bars3Icon, XMarkIcon, ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
-
-
 const navigation = [
-    { name: 'Competition 1', href: '#', icon: ArrowRightIcon, current: true },
-    { name: 'Competition 2', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 3', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 4', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 5', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 6', href: '#', icon: ArrowRightIcon, current: false },
+    { name: 'Competition 1', href: '#', current: true },
+    { name: 'Competition 2', href: '#', current: false },
+    { name: 'Competition 3', href: '#', current: false },
+    { name: 'Competition 4', href: '#', current: false },
+    { name: 'Competition 5', href: '#', current: false },
+    { name: 'Competition 6', href: '#', current: false },
 ]
+
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
+
 const Menu = () => (
 
     <nav className="sticky top-24 space-y-1" aria-label="Sidebar">
@@ -25,13 +24,6 @@ const Menu = () => (
                 )}
                 aria-current={item.current ? 'page' : undefined}
             >
-                <item.icon
-                    className={classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                        'flex-shrink-0 -ml-1 mr-3 h-6 w-6'
-                    )}
-                    aria-hidden="true"
-                />
                 <span className="truncate">{item.name}</span>
             </a>
         ))}

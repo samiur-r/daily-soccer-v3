@@ -10,8 +10,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
-    <div className="flex shadow-lg border">
-      <div className="w-3 bg-emerald-700" />
+    <div className="flex shadow-lg border bg-white mb-2">
       <div className="p-5 flex-1">
         <p className="flex justify-end text-xs md:text-base" suppressHydrationWarning>
           {formatDate(data.Date)}

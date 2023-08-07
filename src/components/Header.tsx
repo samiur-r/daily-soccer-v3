@@ -1,15 +1,16 @@
 "use client";
 
 import { Popover } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, ArrowRightIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
+import LogoSVG from './Logo';
 
 const navigation = [
-    { name: 'Competition 1', href: '#', icon: ArrowRightIcon, current: true },
-    { name: 'Competition 2', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 3', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 4', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 5', href: '#', icon: ArrowRightIcon, current: false },
-    { name: 'Competition 6', href: '#', icon: ArrowRightIcon, current: false },
+    { name: 'Competition 1', href: '#', current: true },
+    { name: 'Competition 2', href: '#', current: false },
+    { name: 'Competition 3', href: '#', current: false },
+    { name: 'Competition 4', href: '#', current: false },
+    { name: 'Competition 5', href: '#', current: false },
+    { name: 'Competition 6', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -22,7 +23,7 @@ const Header = () => (
         className={({ open }) =>
             classNames(
                 open ? 'fixed inset-0 z-40 overflow-y-auto' : '',
-                'sticky top-0 bg-white shadow-sm lg:overflow-y-visible'
+                'sticky top-0 bg-gradient-to-br from-emerald-800 to-emerald-700 shadow-sm lg:overflow-y-visible'
             )
         }
     >
@@ -33,11 +34,7 @@ const Header = () => (
                         <div className="flex md:absolute md:inset-y-0 md:left-0 lg:static xl:col-span-2">
                             <div className="flex flex-shrink-0 items-center">
                                 <a href="#">
-                                    <img
-                                        className="block h-8 w-auto"
-                                        src="https://dummyimage.com/100x32/000/fff.jpg&text=Logo"
-                                        alt="Logo"
-                                    />
+                                    < LogoSVG />
                                 </a>
                             </div>
                         </div>
@@ -45,7 +42,7 @@ const Header = () => (
                             <div className="flex items-center px-6 py-4 md:mx-auto md:max-w-3xl lg:mx-0 lg:max-w-none xl:px-0">
                                 <div className="w-full">
                                     <label htmlFor="search" className="sr-only">
-                                        Search match
+                                        Buscar partido
                                     </label>
                                     <div className="relative">
                                         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -54,8 +51,8 @@ const Header = () => (
                                         <input
                                             id="search"
                                             name="search"
-                                            className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
-                                            placeholder="Search match"
+                                            className="block w-full rounded-sm border border-gray-300 bg-white py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:border-indigo-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                            placeholder="Buscar partido"
                                             type="search"
                                         />
                                     </div>
@@ -73,14 +70,7 @@ const Header = () => (
                                 )}
                             </Popover.Button>
                         </div>
-                        <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                            <a
-                                href="#"
-                                className="ml-5 flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                            </a>
-
-                        </div>
+                       
                     </div>
                 </div>
 
