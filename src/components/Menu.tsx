@@ -1,10 +1,9 @@
 const navigation = [
-    { name: 'Competition 1', href: '#', current: true },
-    { name: 'Competition 2', href: '#', current: false },
-    { name: 'Competition 3', href: '#', current: false },
-    { name: 'Competition 4', href: '#', current: false },
-    { name: 'Competition 5', href: '#', current: false },
-    { name: 'Competition 6', href: '#', current: false },
+    { name: 'Todo', href: '#', current: true },
+    { name: 'LaLiga', href: '#', current: false },
+    { name: 'LaLiga 2', href: '#', current: false },
+    { name: 'Champions League', href: '#', current: false },
+    { name: 'Premier League', href: '#', current: false },
 ]
 
 function classNames(...classes: string[]) {
@@ -19,8 +18,8 @@ const Menu = () => (
                 key={item.name}
                 href={item.href}
                 className={classNames(
-                    item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                    'group flex items-center px-3 py-2 text-sm font-medium rounded-md'
+                    item.current ? 'bg-emerald-900 text-white' : 'text-gray-600 hover:bg-emerald-800 hover:text-white',
+                    'group flex items-center px-3 py-2 text-sm font-medium rounded-sm'
                 )}
                 aria-current={item.current ? 'page' : undefined}
             >
