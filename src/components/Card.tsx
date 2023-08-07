@@ -29,7 +29,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
             <h2 className="uppercase font-normal">{data.AwayTeam.Name}</h2>
           </div>
         </div>
-        <div className="flex flex-row gap-1 md:items-end mt-3">
+        <div className="flex flex-row gap-6 justify-end mt-3">
           {data.Channels &&
             data.Channels.length &&
             data.Channels.map((channel) => (
