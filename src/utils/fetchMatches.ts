@@ -3,7 +3,9 @@ import { DateTime } from "luxon";
 
 const fetchMatches = async (page: number) => {
   const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string, {
-    cache: "no-store",
+    next: {
+      revalidate: 60,
+    },
   });
   const matches = await res.json();
   const filteredMatches = filterMatches(matches);
