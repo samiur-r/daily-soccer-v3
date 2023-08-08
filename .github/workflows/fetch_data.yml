@@ -1,9 +1,6 @@
 name: Fetch and Upload S3 Data
 
-on:
-  schedule:
-    # Run every 5 minutes
-    - cron: '*/1 * * * *'
+on: [push]
 
 jobs:
   fetch_data:
@@ -22,6 +19,6 @@ jobs:
         run: npm install axios
 
       - name: Run the script
-        run: node ./automation\fetchData.js
+        run: node ./automation/fetchData.js
         env:
           X_RAPIDAPI_KEY: ${{ secrets.X_RAPIDAPI_KEY }}
