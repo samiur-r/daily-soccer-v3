@@ -23,6 +23,11 @@ const options = {
         const response = await axios.request(options);
 
         const filteredData = response.data.filter(item =>
+            item.Competition.Id === 3312 || // La Liga EA Sports
+            item.Competition.Id === 3313 || // LaLiga Hypermotion
+            item.Competition.Id === 122 || // Supercopa de España
+            item.Competition.Id === 113 || // Supercopa de Europa
+            item.Competition.Id === 57 || // MLS
             item.Competition.Id === 346 // Joan Gamper
         );
 
