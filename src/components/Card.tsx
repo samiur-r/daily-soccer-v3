@@ -12,9 +12,9 @@ const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <div className="flex shadow-lg border bg-white mb-2" itemScope itemType="http://schema.org/SportsEvent">
       <div className="p-5 flex-1">
-        <time className="flex justify-end text-xs md:text-base" 
-        suppressHydrationWarning 
-        itemProp="startDate"
+        <time className="flex justify-end text-xs md:text-base"
+          suppressHydrationWarning
+          itemProp="startDate"
           dateTime={data.Date}
         >
           {formatDate(data.Date)}
@@ -38,13 +38,18 @@ const Card: React.FC<CardProps> = ({ data }) => {
             data.Channels.length &&
             data.Channels.map((channel) => (
               // <p key={channel.Id}>{channel.Name}</p>
-              <Image
-                key={channel.Id}
-                src={`/img/${channel.Image}`}
-                width={32}
-                height={32}
-                alt={channel.Name}/>
+               <>
+                <Image
+                  key={channel.Id}
+                  src={`/img/${channel.Image}`}
+                  width={32}
+                  height={32}
+                  alt={channel.Name}
+                  itemProp={channel.Name} />
+                  <meta itemProp="location" content={channel.Name} />
+                </>
             ))}
+            
         </div>
       </div>
     </div>
