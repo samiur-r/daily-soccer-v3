@@ -7,7 +7,6 @@ import formatDate from "@/utils/formatDate";
 interface CardProps {
   data: MatchType;
 }
-
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <div className="flex shadow-lg border bg-white mb-2" itemScope itemType="http://schema.org/SportsEvent">
