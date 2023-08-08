@@ -22,14 +22,14 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.Competition.Name}
         </h3>
         <div className="flex gap-3 md:text-3xl font-bold mt-3">
-          <div className="flex gap-2 items-center" itemScope itemType="http://schema.org/SportsTeam">
+          <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
-            <h2 className="uppercase font-normal" itemProp="name">{data.LocalTeam.Name}</h2>
+            <h2 className="uppercase font-normal" itemProp="homeTeam">{data.LocalTeam.Name}</h2>
           </div>
           <p>-</p>
-          <div className="flex gap-2 items-center" itemScope itemType="http://schema.org/SportsTeam">
+          <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
-            <h2 className="uppercase font-normal" itemProp="name">{data.AwayTeam.Name}</h2>
+            <h2 className="uppercase font-normal" itemProp="awayTeam">{data.AwayTeam.Name}</h2>
           </div>
         </div>
         <div className="flex flex-row gap-6 justify-end mt-3">
@@ -45,9 +45,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
                 alt={channel.Name}
                 itemProp="broadcastOfEvent" />
             ))}
-        </div>
-        <div className="flex gap-2 md:justify-end mt-5">
-          {/* <Image src="/moviestar.png" width={80} height={45} alt="icon" /> */}
         </div>
       </div>
     </div>
