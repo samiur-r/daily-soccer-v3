@@ -37,7 +37,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.Channels &&
             data.Channels.length &&
             data.Channels.map((channel) => (
-               <>
                 <Image
                   key={channel.Id}
                   src={`/img/${channel.Image}`}
@@ -46,10 +45,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
                   alt={channel.Name}
                   title={channel.Name}
                   itemProp={channel.Name} />
-                  <meta itemProp="location" content={channel.Name} />
-                </>
             ))}
-            
         </div>
       </div>
     </div>
