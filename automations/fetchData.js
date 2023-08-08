@@ -1,6 +1,6 @@
 const axios = require('axios');
 const AWS = require('aws-sdk');
-import { COMPETITION_IDS } from '../utils/competitions';
+const { COMPETITION_IDS } = require('../utils/competitions');
 
 // Configure AWS with environment credentials
 AWS.config.update({
