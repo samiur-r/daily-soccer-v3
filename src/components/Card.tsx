@@ -44,6 +44,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
                   width={32}
                   height={32}
                   alt={channel.Name}
+                  title={channel.Name}
                   itemProp={channel.Name} />
                   <meta itemProp="location" content={channel.Name} />
                 </>
