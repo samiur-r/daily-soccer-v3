@@ -42,7 +42,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
                 src={`/img/${channel.Image}`}
                 width={32}
                 height={32}
-                alt={channel.Name} />
+                alt={channel.Name}
+                itemProp="location" />
             ))}
         </div>
       </div>
