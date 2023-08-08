@@ -2,10 +2,7 @@ name: Fetch Wosti data and Upload S3
 
 on:
   push:
-  schedule:
-    # Run every 2 hours
-    - cron: '0 */2 * * *'
-
+    branches: [ main ]
 jobs:
   fetch_data:
     runs-on: ubuntu-latest
