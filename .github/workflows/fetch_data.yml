@@ -19,6 +19,9 @@ jobs:
         run: npm install axios aws-sdk
 
       - name: Run the script
+      
         run: node ./automation/fetchData.js
         env:
           X_RAPIDAPI_KEY: ${{ secrets.X_RAPIDAPI_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
