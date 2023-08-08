@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <h3 className="text-sm md:text-xl font-semibold italic" itemProp="name">
           {data.Competition.Name}
         </h3>
-        <div className="flex gap-3 text-3xl font-bold mt-3">
+        <div className="flex gap-3 text-2xl md:text-3xl font-bold mt-3">
           <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
             <h2 className="uppercase font-normal" itemProp="homeTeam">{data.LocalTeam.Name}</h2>
