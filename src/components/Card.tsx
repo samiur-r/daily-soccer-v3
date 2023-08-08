@@ -15,6 +15,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <time className="flex justify-end text-xs md:text-base" 
         suppressHydrationWarning 
         itemProp="startDate"
+          dateTime={data.Date}
         >
           {formatDate(data.Date)}
         </time>
