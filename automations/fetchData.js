@@ -1,6 +1,5 @@
 const axios = require('axios');
 const AWS = require('aws-sdk');
-const { COMPETITION_IDS } = require('../utils/competitions');
 
 // Configure AWS with environment credentials
 AWS.config.update({
@@ -23,7 +22,14 @@ const options = {
     try {
         const response = await axios.request(options);
 
-        const filteredData = response.data.filter(item => COMPETITION_IDS.includes(item.Competition.Id));
+        const filteredData = response.data.filter(item =>
+            item.Competition.Id === 3312 || // La Liga EA Sports
+            item.Competition.Id === 3313 || // LaLiga Hypermotion
+            item.Competition.Id === 122 || // Supercopa de España
+            item.Competition.Id === 113 || // Supercopa de Europa
+            item.Competition.Id === 57 || // MLS
+            item.Competition.Id === 346 // Joan Gamper
+        );
 
 
         const data = JSON.stringify(filteredData, null, 4);
