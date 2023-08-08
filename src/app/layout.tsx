@@ -6,8 +6,8 @@ const inter = Oswald({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-  title: "Donde lo dan",
-  description: "Donde dan los partidos de fútbol",
+  title: "Próximos Partidos de Fútbol: Canales y Plataformas de Streaming | Dónde lo dan",
+  description: "Encuentra dónde ver tus partidos de fútbol favoritos. Consulta en qué canal y plataforma de streaming se transmiten los encuentros más esperados. ¡Mantente siempre informado!",
 };
 
 export default function RootLayout({
