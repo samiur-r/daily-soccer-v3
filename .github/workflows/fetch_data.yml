@@ -24,7 +24,7 @@ jobs:
 
       - name: Run the script
       
-        run: node ./automations/fetchData.js
+        run: node ./automations/fetchData.tsx
         env:
           X_RAPIDAPI_KEY: ${{ secrets.X_RAPIDAPI_KEY }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
