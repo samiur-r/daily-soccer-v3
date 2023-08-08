@@ -37,7 +37,6 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.Channels &&
             data.Channels.length &&
             data.Channels.map((channel) => (
-              // <p key={channel.Id}>{channel.Name}</p>
                <>
                 <Image
                   key={channel.Id}
