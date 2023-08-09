@@ -5,10 +5,10 @@ import Script from "next/script";
 
 const inter = Oswald({ subsets: ["latin"] });
 
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_NAME = "DondeLoDan";
+const APP_DEFAULT_TITLE = "Próximos Partidos de Fútbol: Canales y Plataformas de Streaming | Dónde lo dan";
+const APP_TITLE_TEMPLATE = "%s";
+const APP_DESCRIPTION = "Encuentra dónde ver tus partidos de fútbol favoritos. Consulta en qué canal y plataforma de streaming se transmiten los encuentros más esperados. ¡Mantente siempre informado!";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
