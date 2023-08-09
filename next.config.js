@@ -1,10 +1,4 @@
-const withPWA = require('next-pwa')({
-    dest: 'public'
-})
-
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    // Aquí puedes añadir otras configuraciones de Next.js si lo necesitas
-};
+const nextConfig = {};
 
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig;
