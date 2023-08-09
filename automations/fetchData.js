@@ -1,15 +1,15 @@
 const axios = require('axios');
 const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 
-// Configure AWS with environment credentials
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
 });
 
-const s3 = new AWS.S3();
 
-// IDs de competiciones a filtrar
+// ******************************* //
+// IDs de competiciones a filtrar //
 const competitionIdsToFilter = [
     3312, // La Liga EA Sports
     3313, // LaLiga Hypermotion
@@ -18,6 +18,9 @@ const competitionIdsToFilter = [
     57,   // MLS
     346   // Joan Gamper
 ];
+// ******************************* //
+// ******************************* //
+
 const EventsData = {
     method: 'GET',
     url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Events',
@@ -51,7 +54,7 @@ const CompetitionsData = {
         );
 
 
-        const mergedData = [...competitionIdsToFilter, ...filteredCompetitions];
+        const mergedData = [...filteredEvents, ...filteredCompetitions];
 
         const data = JSON.stringify(mergedData, null, 4);
 
