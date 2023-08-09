@@ -38,20 +38,20 @@ const CompetitionsData = {
 
 (async () => {
     try {
-        const response1 = await axios.request(EventsData);
-        const response2 = await axios.request(CompetitionsData);
+        const responseEvents = await axios.request(EventsData);
+        const responseCompetitions = await axios.request(CompetitionsData);
 
 
-        const filteredData = response1.data.filter(item =>
+        const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
         );
 
-        const filteredData2 = response2.data.filter(item =>
+        const filteredCompetitions = responseCompetitions.data.filter(item =>
             competitionIdsToFilter.includes(item.Id)
         );
 
 
-        const mergedData = [...filteredData, ...filteredData2];
+        const mergedData = [...competitionIdsToFilter, ...filteredCompetitions];
 
         const data = JSON.stringify(mergedData, null, 4);
 
