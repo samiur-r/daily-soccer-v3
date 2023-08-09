@@ -16,7 +16,7 @@ const competitionIdsToFilter = [
     122,  // Supercopa de España
     113,  // Supercopa de Europa
     57,   // MLS
-    346   // Joan Gamper
+    2     // Premier League
 ];
 // ******************************* //
 // ******************************* //
@@ -39,10 +39,10 @@ const CompetitionsData = {
     }
 };
 
-
-
 (async () => {
     try {
+
+        // Get Events
         const responseEvents = await axios.request(EventsData);
         const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
@@ -59,6 +59,7 @@ const CompetitionsData = {
         await s3.upload(paramsEvents).promise();
 
 
+        // Get Competitions
         const responseCompetitions = await axios.request(CompetitionsData);
         const filteredCompetitions = responseCompetitions.data.filter(item =>
             competitionIdsToFilter.includes(item.Id)
