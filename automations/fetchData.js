@@ -30,33 +30,15 @@ const EventsData = {
     }
 };
 
-const CompetitionsData = {
-    method: 'GET',
-    url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Competitions',
-    headers: {
-        'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
-        'X-RapidAPI-Host': 'wosti-futbol-tv-spain.p.rapidapi.com'
-    }
-};
-
 (async () => {
     try {
         const responseEvents = await axios.request(EventsData);
-        const responseCompetitions = await axios.request(CompetitionsData);
-
 
         const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
         );
 
-        const filteredCompetitions = responseCompetitions.data.filter(item =>
-            competitionIdsToFilter.includes(item.Id)
-        );
-
-
-        const mergedData = [...filteredEvents, ...filteredCompetitions];
-
-        const data = JSON.stringify(mergedData, null, 4);
+        const data = JSON.stringify(filteredEvents, null, 4);
 
         var params = {
             Bucket: "dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb",
@@ -65,7 +47,6 @@ const CompetitionsData = {
         };
 
         await s3.upload(params).promise();
-        console.log('File uploaded successfully');
 
     } catch (error) {
         console.error(error);
