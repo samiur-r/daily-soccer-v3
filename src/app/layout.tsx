@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Oswald } from "next/font/google";
-import Script from "next/script";
 
 const inter = Oswald({ subsets: ["latin"] });
 
@@ -9,6 +8,7 @@ const APP_NAME = "DondeLoDan";
 const APP_DEFAULT_TITLE = "Próximos Partidos de Fútbol: Canales y Plataformas de Streaming | Dónde lo dan";
 const APP_TITLE_TEMPLATE = "%s";
 const APP_DESCRIPTION = "Encuentra dónde ver tus partidos de fútbol favoritos. Consulta en qué canal y plataforma de streaming se transmiten los encuentros más esperados. ¡Mantente siempre informado!";
+const APP_IMAGE = "./social/dondelodan.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -36,6 +36,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: APP_IMAGE
   },
   twitter: {
     card: "summary",
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
       template: APP_TITLE_TEMPLATE,
     },
     description: APP_DESCRIPTION,
+    images: APP_IMAGE
   },
 };
 
