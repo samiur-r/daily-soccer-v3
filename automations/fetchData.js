@@ -44,7 +44,7 @@ const CompetitionsData = {
 
         // Filtrado de datos de la segunda API (ajusta según tus necesidades)
         const filteredData2 = response2.data.filter(item => {
-            item.Competition.Id === 3312 || // La Liga EA Sports
+                item.Id === 3312 || // La Liga EA Sports
                 item.Id === 3313 || // LaLiga Hypermotion
                 item.Id === 122 || // Supercopa de España
                 item.Id === 113 || // Supercopa de Europa
