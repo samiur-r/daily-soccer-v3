@@ -73,7 +73,7 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
               />
             </svg>
           )}
-          Ver más
+          Ver más partidos
         </button>
       )}
     </div>

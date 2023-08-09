@@ -29,7 +29,7 @@ export default async function Home() {
           </main>
           <aside className="hidden xl:col-span-3 xl:block">
             <div className="sticky top-24 space-y-4">
-              <img src="https://dummyimage.com/315x250/dbdbdb/707070.jpg" width={315} height={250} alt="icon" />
+              sidebar
             </div>
           </aside>
         </div>
