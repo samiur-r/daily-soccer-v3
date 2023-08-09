@@ -43,14 +43,8 @@ const CompetitionsData = {
         );
 
         // Filtrado de datos de la segunda API (ajusta según tus necesidades)
-        const filteredData2 = response2.data.filter(item => {
-                item.Id === 3312 || // La Liga EA Sports
-                item.Id === 3313 || // LaLiga Hypermotion
-                item.Id === 122 || // Supercopa de España
-                item.Id === 113 || // Supercopa de Europa
-                item.Id === 57 || // MLS
-                item.Id === 346 // Joan Gamper
-        });
+        const filteredData2 = response2.data.filter(item => 
+                item.Id === 3312);
         console.log("DATA2 FILTERED", filteredData2)
 
         const mergedData = [...filteredData, ...filteredData2];
