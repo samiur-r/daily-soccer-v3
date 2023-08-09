@@ -61,7 +61,7 @@ const CompetitionsData = {
 
         const responseCompetitions = await axios.request(CompetitionsData);
         const filteredCompetitions = responseCompetitions.data.filter(item =>
-            competitionIdsToFilter.includes(item.Competition.Id)
+            competitionIdsToFilter.includes(item.Id)
         );
 
         const dataCompetitions = JSON.stringify(filteredCompetitions, null, 4);
