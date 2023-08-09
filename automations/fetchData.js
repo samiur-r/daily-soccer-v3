@@ -53,8 +53,8 @@ const CompetitionsData = {
         const data = JSON.stringify(mergedData, null, 4);
 
         var params = {
-            Bucket: process.env.S3_BUCKET,
-            Key: process.env.S3_KEY,
+            Bucket: "dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb",
+            Key: "events_y473sycnsryug46z7vbw4xhjc2238pq2nzicw5vh6h8gypgzaw.json",
             Body: data
         };
 
