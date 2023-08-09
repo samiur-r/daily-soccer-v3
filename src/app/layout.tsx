@@ -56,6 +56,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
+      <head>
+        <link rel="canonical" href="https://www.dondelodan.com" />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
