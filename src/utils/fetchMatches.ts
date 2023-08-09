@@ -11,8 +11,8 @@ const fetchMatches = async (page: number) => {
   const filteredMatches = filterMatches(matches);
   const totalItems = filteredMatches.length;
 
-  const startIdx = (page - 1) * 10;
-  const endIdx = startIdx + 10;
+  const startIdx = (page - 1) * 20;
+  const endIdx = startIdx + 20;
   const paginatedData: any = filteredMatches.slice(startIdx, endIdx);
 
   return { matches: paginatedData, totalItems };
