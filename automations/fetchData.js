@@ -9,7 +9,7 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
-const options = {
+const EventsData = {
     method: 'GET',
     url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Events',
     headers: {
@@ -18,11 +18,22 @@ const options = {
     }
 };
 
+const CompetitionsData = {
+    method: 'GET',
+    url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Competitions',
+    headers: {
+        'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+        'X-RapidAPI-Host': 'wosti-futbol-tv-spain.p.rapidapi.com'
+    }
+};
+
 (async () => {
     try {
-        const response = await axios.request(options);
+        const response1 = await axios.request(EventsData);
+        const response2 = await axios.request(CompetitionsData);
 
-        const filteredData = response.data.filter(item =>
+
+        const filteredData = response1.data.filter(item =>
             item.Competition.Id === 3312 || // La Liga EA Sports
             item.Competition.Id === 3313 || // LaLiga Hypermotion
             item.Competition.Id === 122 || // Supercopa de España
@@ -31,7 +42,15 @@ const options = {
             item.Competition.Id === 346 // Joan Gamper
         );
 
-        const data = JSON.stringify(filteredData, null, 4);
+        // Filtrado de datos de la segunda API (ajusta según tus necesidades)
+        const filteredData2 = response2.data.filter(item => {
+            // Añade tu lógica de filtrado aquí
+            return true; // Esto es solo un ejemplo, ajusta según tus necesidades
+        });
+
+        const mergedData = [...filteredData, ...filteredData2];
+
+        const data = JSON.stringify(mergedData, null, 4);
 
         var params = {
             Bucket: process.env.S3_BUCKET,
