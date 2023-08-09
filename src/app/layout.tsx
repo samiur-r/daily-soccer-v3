@@ -54,14 +54,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <head>
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
