@@ -8,7 +8,7 @@ const APP_NAME = "DondeLoDan";
 const APP_DEFAULT_TITLE = "Próximos Partidos de Fútbol: Canales y Plataformas de Streaming | Dónde lo dan";
 const APP_TITLE_TEMPLATE = "%s";
 const APP_DESCRIPTION = "Encuentra dónde ver tus partidos de fútbol favoritos. Consulta en qué canal y plataforma de streaming se transmiten los encuentros más esperados. ¡Mantente siempre informado!";
-const APP_IMAGE = "/social/dondelodan.png";
+const APP_IMAGE = "https://www.dondelodan.com/social/dondelodan.png";
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
