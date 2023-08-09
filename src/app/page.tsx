@@ -29,7 +29,7 @@ export default async function Home() {
           </main>
           <aside className="hidden xl:col-span-3 xl:block">
             <div className="sticky top-24 space-y-4">
-             <h1>Donde dan los próximos partidos de fútbol</h1>
+              <h1>¿Dónde lo dan? Encuentra Dónde Verlo: Próximos Partidos de Fútbol en Canales y Plataformas de Streaming.</h1>
             </div>
           </aside>
         </div>
