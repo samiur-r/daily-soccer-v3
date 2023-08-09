@@ -30,23 +30,48 @@ const EventsData = {
     }
 };
 
+const CompetitionsData = {
+    method: 'GET',
+    url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Competitions',
+    headers: {
+        'X-RapidAPI-Key': process.env.X_RAPIDAPI_KEY,
+        'X-RapidAPI-Host': 'wosti-futbol-tv-spain.p.rapidapi.com'
+    }
+};
+
+
+
 (async () => {
     try {
         const responseEvents = await axios.request(EventsData);
-
         const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
         );
 
-        const data = JSON.stringify(filteredEvents, null, 4);
+        const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
-        var params = {
+        var paramsEvents = {
             Bucket: "dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb",
             Key: "events_y473sycnsryug46z7vbw4xhjc2238pq2nzicw5vh6h8gypgzaw.json",
-            Body: data
+            Body: dataEvents
         };
+        
+        await s3.upload(paramsEvents).promise();
 
-        await s3.upload(params).promise();
+
+        const responseCompetitions = await axios.request(CompetitionsData);
+        const filteredCompetitions = responseCompetitions.data.filter(item =>
+            competitionIdsToFilter.includes(item.Competition.Id)
+        );
+
+        const dataCompetitions = JSON.stringify(filteredCompetitions, null, 4);
+
+        var paramsCompetitions = {
+            Bucket: "dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb",
+            Key: "competitions_y473sycnsryug46z7vbw4xhjc2238pq2nzicw5vh6h8gypgzaw.json",
+            Body: dataCompetitions
+        };
+        await s3.upload(paramsCompetitions).promise();
 
     } catch (error) {
         console.error(error);
