@@ -9,6 +9,15 @@ AWS.config.update({
 
 const s3 = new AWS.S3();
 
+// IDs de competiciones a filtrar
+const competitionIdsToFilter = [
+    3312, // La Liga EA Sports
+    3313, // LaLiga Hypermotion
+    122,  // Supercopa de España
+    113,  // Supercopa de Europa
+    57,   // MLS
+    346   // Joan Gamper
+];
 const EventsData = {
     method: 'GET',
     url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Events',
@@ -34,18 +43,13 @@ const CompetitionsData = {
 
 
         const filteredData = response1.data.filter(item =>
-            item.Competition.Id === 3312 || // La Liga EA Sports
-            item.Competition.Id === 3313 || // LaLiga Hypermotion
-            item.Competition.Id === 122 || // Supercopa de España
-            item.Competition.Id === 113 || // Supercopa de Europa
-            item.Competition.Id === 57 || // MLS
-            item.Competition.Id === 346 // Joan Gamper
+            competitionIdsToFilter.includes(item.Competition.Id)
         );
 
-        // Filtrado de datos de la segunda API (ajusta según tus necesidades)
-        const filteredData2 = response2.data.filter(item => 
-                item.Id === 3312);
-        console.log("DATA2 FILTERED", filteredData2)
+        const filteredData2 = response2.data.filter(item =>
+            competitionIdsToFilter.includes(item.Id)
+        );
+
 
         const mergedData = [...filteredData, ...filteredData2];
 
