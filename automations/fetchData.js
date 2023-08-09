@@ -31,12 +31,11 @@ const options = {
             item.Competition.Id === 346 // Joan Gamper
         );
 
-
         const data = JSON.stringify(filteredData, null, 4);
 
         var params = {
-            Bucket: 'dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb',
-            Key: 'events_y473sycnsryug46z7vbw4xhjc2238pq2nzicw5vh6h8gypgzaw.json',
+            Bucket: process.env.S3_BUCKET,
+            Key: process.env.S3_KEY,
             Body: data
         };
 
