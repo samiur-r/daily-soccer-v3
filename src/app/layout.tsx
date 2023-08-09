@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: APP_NAME,
+    url: "https://www.dondelodan.com",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
+    site: "@dondelodan",
     title: {
       default: APP_DEFAULT_TITLE,
       template: APP_TITLE_TEMPLATE,
