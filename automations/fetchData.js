@@ -33,7 +33,7 @@ const CompetitionsData = {
         const response2 = await axios.request(CompetitionsData);
 
 
-        const filteredData = response1.filter(item =>
+        const filteredData = response1.data.filter(item =>
             item.Competition.Id === 3312 || // La Liga EA Sports
             item.Competition.Id === 3313 || // LaLiga Hypermotion
             item.Competition.Id === 122 || // Supercopa de España
@@ -43,7 +43,7 @@ const CompetitionsData = {
         );
 
         // Filtrado de datos de la segunda API (ajusta según tus necesidades)
-        const filteredData2 = response2.filter(item => {
+        const filteredData2 = response2.data.filter(item => {
                 item.Id === 3312 || // La Liga EA Sports
                 item.Id === 3313 || // LaLiga Hypermotion
                 item.Id === 122 || // Supercopa de España
