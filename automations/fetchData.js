@@ -51,7 +51,7 @@ const CompetitionsData = {
                 item.Id === 57 || // MLS
                 item.Id === 346 // Joan Gamper
         });
-        console.log("DATA2 FILTERED", filteredData2)
+        console.log("DATA2 FILTERED", response2)
 
         const mergedData = [...filteredData, ...filteredData2];
 
