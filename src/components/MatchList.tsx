@@ -36,7 +36,7 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
       ))}
       {matchList.length < totalItems && (
         <button
-          className="max-w-max mx-auto mt-5 flex gap-3 items-center bg-emerald-800 hover:bg-emerald-700 text-white font-semibold hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
+          className="w-full md:max-w-max w-100 mx-auto mt-5 flex gap-3 text-2xl justify-center items-center bg-emerald-800 hover:bg-emerald-700 text-white font-regular hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
           onClick={fetchNextPage}
         >
           {isLoading ? (
