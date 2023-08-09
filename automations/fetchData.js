@@ -44,8 +44,12 @@ const CompetitionsData = {
 
         // Filtrado de datos de la segunda API (ajusta según tus necesidades)
         const filteredData2 = response2.data.filter(item => {
-            // Añade tu lógica de filtrado aquí
-            return true; // Esto es solo un ejemplo, ajusta según tus necesidades
+            item.Competition.Id === 3312 || // La Liga EA Sports
+                item.Id === 3313 || // LaLiga Hypermotion
+                item.Id === 122 || // Supercopa de España
+                item.Id === 113 || // Supercopa de Europa
+                item.Id === 57 || // MLS
+                item.Id === 346 // Joan Gamper
         });
 
         const mergedData = [...filteredData, ...filteredData2];
