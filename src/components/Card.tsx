@@ -10,7 +10,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
-    <div className="flex shadow-lg border bg-white mb-3" itemScope itemType="http://schema.org/SportsEvent">
+    <div className="flex shadow border bg-white mb-3" itemScope itemType="http://schema.org/SportsEvent">
       <div className="p-5 flex-1">
         <time className="flex justify-end text-xs md:text-base"
           suppressHydrationWarning
