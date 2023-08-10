@@ -21,6 +21,14 @@ const competitionIdsToFilter = [
 // ******************************* //
 // ******************************* //
 
+function updateChannelName(data) {
+    data.Channels.forEach(channel => {
+        if (channel.Name === "Amazon Prime Video (Prueba gratis)") {
+            channel.Name = "Amazon Prime Video";
+        }
+    });
+}
+
 const EventsData = {
     method: 'GET',
     url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Events',
@@ -47,7 +55,8 @@ const CompetitionsData = {
         const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
         );
-
+        filteredEvents.forEach(event => updateChannelName(event));
+        
         const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
         var paramsEvents = {

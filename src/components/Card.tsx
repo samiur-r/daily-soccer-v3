@@ -36,6 +36,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           {data.Channels &&
             data.Channels.length &&
             data.Channels.map((channel) => (
+              
               <Image
                 key={channel.Id}
                 src={`/img/${channel.Image}`}
@@ -50,7 +51,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
       <div itemScope itemType="https://schema.org/SportsEvent">
         <meta itemProp="name" content={`${data.LocalTeam.Name} - ${data.AwayTeam.Name}`} />
-        <meta itemProp="description" content={`Partido de fútbol entre ${data.LocalTeam.Name} - ${data.AwayTeam.Name} - ${formatDate(data.Date)}`} />
+        <meta itemProp="description" content={`Partido de fútbol entre ${data.LocalTeam.Name} - ${data.AwayTeam.Name} - ${formatDate(data.Date)} por ${data.Competition.Name}`} />
         <meta itemProp="url" content="https://www.dondelodan.com/" />
         <meta itemProp="startDate" content={data.Date} />
         <meta itemProp="duration" content="PT1H30M" />
@@ -65,7 +66,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           data.Channels.length &&
           data.Channels.map((channel) => (
             <div itemProp="location" itemScope itemType="https://schema.org/Place" key={channel.Id}>
-              <meta itemProp="name" content={channel.Name} />
+              <p>{channel.Name}</p> <meta itemProp="name" content={channel.Name} />
             </div>
           ))}
       </div>
