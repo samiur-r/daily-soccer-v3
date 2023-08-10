@@ -50,10 +50,10 @@ const Card: React.FC<CardProps> = ({ data }) => {
 
       <div itemScope itemType="https://schema.org/SportsEvent">
         <meta itemProp="name" content={`${data.LocalTeam.Name} - ${data.AwayTeam.Name}`} />
-        <meta itemProp="description" content={`${data.LocalTeam.Name} - ${data.AwayTeam.Name} - ${formatDate(data.Date)}`} />
-        <meta itemProp="url" content="https://www.dondelodan.com" />
+        <meta itemProp="description" content={`Partido de fútbol entre ${data.LocalTeam.Name} - ${data.AwayTeam.Name} - ${formatDate(data.Date)}`} />
+        <meta itemProp="url" content="https://www.dondelodan.com/" />
         <meta itemProp="startDate" content={data.Date} />
-        <meta itemProp="duration" content="T1H45M" />
+        <meta itemProp="duration" content="PT1H30M" />
         <meta itemProp="organizer" content={data.Competition.Name} />
         <div itemProp="homeTeam" itemScope itemType="https://schema.org/SportsTeam">
           <meta itemProp="name" content={data.LocalTeam.Name} />
