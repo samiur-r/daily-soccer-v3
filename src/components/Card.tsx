@@ -43,11 +43,33 @@ const Card: React.FC<CardProps> = ({ data }) => {
                 height={32}
                 alt={channel.Name}
                 title={channel.Name}
-                />
+              />
             ))}
         </div>
       </div>
-    </div>
+
+      <div itemScope itemType="https://schema.org/SportsEvent">
+        <meta itemProp="name" content={`${data.LocalTeam.Name} - ${data.AwayTeam.Name}`} />
+        <meta itemProp="description" content={`${data.LocalTeam.Name} - ${data.AwayTeam.Name} - ${formatDate(data.Date)}`} />
+        <meta itemProp="url" content="https://www.dondelodan.com" />
+        <meta itemProp="startDate" content={data.Date} />
+        <meta itemProp="duration" content="T1H45M" />
+        <meta itemProp="organizer" content={data.Competition.Name} />
+        <div itemProp="homeTeam" itemScope itemType="https://schema.org/SportsTeam">
+          <meta itemProp="name" content={data.LocalTeam.Name} />
+        </div>
+        <div itemProp="awayTeam" itemScope itemType="https://schema.org/SportsTeam">
+          <meta itemProp="name" content={data.AwayTeam.Name} />
+        </div>
+        {data.Channels &&
+          data.Channels.length &&
+          data.Channels.map((channel) => (
+            <div itemProp="location" itemScope itemType="https://schema.org/Place">
+              <meta itemProp="name" content={channel.Name} />
+            </div>
+          ))}
+      </div>
+    </div >
   );
 };
 
