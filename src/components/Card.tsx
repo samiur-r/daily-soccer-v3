@@ -66,7 +66,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
           data.Channels.length &&
           data.Channels.map((channel) => (
             <div itemProp="location" itemScope itemType="https://schema.org/Place" key={channel.Id}>
-              <p>{channel.Name}</p> <meta itemProp="name" content={channel.Name} />
+              <meta itemProp="name" content={channel.Name} />
             </div>
           ))}
       </div>

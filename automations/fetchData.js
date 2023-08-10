@@ -26,6 +26,12 @@ function updateChannelName(data) {
         if (channel.Name === "Amazon Prime Video (Prueba gratis)") {
             channel.Name = "Amazon Prime Video";
         }
+        if (channel.Name === "DAZN (Regístrate)") {
+            channel.Name = "DAZN";
+        }
+        if (channel.Name === "GOL PLAY (Síguelo en directo)") {
+            channel.Name = "GOL PLAY";
+        }
     });
 }
 
@@ -56,7 +62,7 @@ const CompetitionsData = {
             competitionIdsToFilter.includes(item.Competition.Id)
         );
         filteredEvents.forEach(event => updateChannelName(event));
-        
+
         const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
         var paramsEvents = {
