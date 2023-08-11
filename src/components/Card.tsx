@@ -13,7 +13,8 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
-    <div className="flex shadow border bg-white mb-3">
+   
+    <section className="flex shadow border bg-white mb-3">
       <div className="p-5 flex-1">
         <time className="flex justify-end text-xs md:text-base"
           suppressHydrationWarning
@@ -73,7 +74,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
             </div>
           ))}
       </div>
-    </div >
+    </section >
   );
 };
 
