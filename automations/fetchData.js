@@ -37,12 +37,12 @@ function updateChannelName(data) {
   });
 }
 
-function updateImageExtension(data) {
-    data.Competition.forEach((competition) => {
-        if (competition.Image === "20130727123206-espana.png") {
-            competition.Image = "laliga_espana.png";
-        }
-    });
+function changeCompetitionImage(data) {
+  for (let item of data) {
+    if (item.Competition.Image === "20130727123206-espana.png") {
+      item.Competition.Image = "laliga_espana.png";
+    }
+  }
 }
 
 const EventsData = {
@@ -72,7 +72,7 @@ const CompetitionsData = {
     );
     filteredEvents.forEach((event) => {
       updateChannelName(event);
-      updateImageExtension(event);
+      changeCompetitionImage(event);
     });
 
     const dataEvents = JSON.stringify(filteredEvents, null, 4);
