@@ -15,9 +15,8 @@ const Menu = () => (
     <nav className="sticky top-24 space-y-1" aria-label="Navegación Principal" itemScope itemType="https://schema.org/SiteNavigationElement">
         <ul>
             {navigation.map((item) => (
-                <li>
+                <li key={item.name}>
                     <a
-                        key={item.name}
                         itemProp="url"
                         href={item.href}
                         className={classNames(
