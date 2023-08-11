@@ -64,7 +64,7 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
   return (
     <div className="flex-1 w-full max-w-5xl">
 
-      <h2 className="text-4xl font-bold">Todos los partidos de fútbol</h2>
+      <h2 className="text-2xl lg:text-4xl font-bold">Todos los partidos de fútbol</h2>
 
       {Object.entries(categorizeMatchesByDate(matchList)).map(([date, dateMatches]) => (
         <div key={date}>
