@@ -12,20 +12,25 @@ function classNames(...classes: string[]) {
 
 const Menu = () => (
 
-    <nav className="sticky top-24 space-y-1" aria-label="Sidebar">
-        {navigation.map((item) => (
-            <a
-                key={item.name}
-                href={item.href}
-                className={classNames(
-                    item.current ? 'bg-emerald-900 text-white' : 'text-gray-600 hover:bg-emerald-800 hover:text-white',
-                    'group flex items-center px-3 py-2 text-md font-regular rounded-sm'
-                )}
-                aria-current={item.current ? 'page' : undefined}
-            >
-                <span className="truncate">{item.name}</span>
-            </a>
-        ))}
+    <nav className="sticky top-24 space-y-1" aria-label="Navegación Principal" itemScope itemType="https://schema.org/SiteNavigationElement">
+        <ul>
+            {navigation.map((item) => (
+                <li>
+                    <a
+                        itemProp="url"
+                        key={item.name}
+                        href={item.href}
+                        className={classNames(
+                            item.current ? 'bg-emerald-900 text-white' : 'text-gray-600 hover:bg-emerald-800 hover:text-white',
+                            'group flex items-center px-3 py-2 text-md font-regular rounded-sm'
+                        )}
+                        aria-current={item.current ? 'page' : undefined}
+                    >
+                        <span className="truncate">{item.name}</span>
+                    </a>
+                </li>
+            ))}
+        </ul>
     </nav>
 
 )
