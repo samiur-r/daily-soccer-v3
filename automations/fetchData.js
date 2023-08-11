@@ -74,9 +74,9 @@ const CompetitionsData = {
             competitionIdsToFilter.includes(item.Competition.Id)
         );
         filteredEvents.forEach(event => updateChannelName(event));
-        // filteredEvents.forEach(event => updateCompetitionImage(event));
-        console.log(filteredEvents)
-        const dataEvents = JSON.stringify(filteredEvents, null, 4);
+        filteredEvents2.forEach(event => updateCompetitionImage(filteredEvents));
+
+        const dataEvents = JSON.stringify(filteredEvents2, null, 4);
 
         var paramsEvents = {
             Bucket: "dondelodanhbmecdrfz62tpo3f89htjtgb4kuu4zx5t8idyjdphj9xnj8gjb",
