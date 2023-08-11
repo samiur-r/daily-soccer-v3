@@ -39,8 +39,14 @@ function updateChannelName(data) {
 
 function changeCompetitionImage(data) {
   for (let item of data) {
-      if (item.Competition.Id === 3312) {
-      item.Competition.Image = "laliga_espana.png";
+    if (item.Competition.Id === 3312) {
+      item.Competition.Image = "la-liga-espana.png";
+    }
+    if (item.Competition.Id === 3313) {
+      item.Competition.Image = "la-liga-2espana.png";
+    }
+    if (item.Competition.Id === 2) {
+      item.Competition.Image = "premier-league.png";
     }
   }
 }
