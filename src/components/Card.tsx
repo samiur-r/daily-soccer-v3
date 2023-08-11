@@ -28,12 +28,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         <div className="flex gap-3 text-2xl md:text-3xl font-bold mt-3">
           <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
-            <h2 className={`${oswaldFont.className} uppercase font-normal`}>{data.LocalTeam.Name}</h2>
-          </div>
-          <p>-</p>
-          <div className="flex gap-2 items-center">
-            {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
-            <h2 className={`${oswaldFont.className} uppercase font-normal`}>{data.AwayTeam.Name}</h2>
+            <h2 className={`${oswaldFont.className} uppercase font-normal`}>{data.LocalTeam.Name} - {data.AwayTeam.Name}</h2>
           </div>
         </div>
         <div className="flex flex-row gap-6 justify-end mt-3">
