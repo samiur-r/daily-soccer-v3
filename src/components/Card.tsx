@@ -22,10 +22,10 @@ const Card: React.FC<CardProps> = ({ data }) => {
         >
           {formatDate(data.Date)}
         </time>
-        <p className="text-sm md:text-xl font-semibold italic">
+        <p className="text-sm md:text-lg font-normal">
           {data.Competition.Name}
         </p>
-        <div className="flex gap-3 text-2xl md:text-3xl font-bold mt-3">
+        <div className="flex gap-3 text-2xl md:text-3xl font-bold">
           <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
             <h2 className={`${oswaldFont.className} uppercase font-normal`}>{data.LocalTeam.Name} - {data.AwayTeam.Name}</h2>

@@ -21,7 +21,7 @@ const Menu = () => (
                         href={item.href}
                         className={classNames(
                             item.current ? 'bg-emerald-900 text-white font-medium' : 'text-gray-600 hover:bg-emerald-800 hover:text-white',
-                            'group flex items-center px-3 py-2 text-md font-regular rounded-sm'
+                            'group flex items-center px-3 py-2 text-md font-regular'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                     >
