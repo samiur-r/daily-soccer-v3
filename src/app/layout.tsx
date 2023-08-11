@@ -1,8 +1,11 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Oswald } from "next/font/google";
+import { Roboto_Condensed } from "next/font/google";
 
-const inter = Oswald({ subsets: ["latin"] });
+const roboto_c = Roboto_Condensed({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 
 const APP_NAME = "DondeLoDan";
 const APP_DEFAULT_TITLE = "Próximos Partidos de Fútbol: Canales y Plataformas de Streaming | Dónde lo dan";
@@ -62,7 +65,7 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://www.dondelodan.com" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={roboto_c.className}>{children}</body>
     </html>
   );
 }

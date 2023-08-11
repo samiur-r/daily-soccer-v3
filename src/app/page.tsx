@@ -29,7 +29,7 @@ export default async function Home() {
           </main>
           <aside className="hidden xl:col-span-3 xl:block">
             <div className="sticky top-24 space-y-4 border-l-4 border-emerald-700 ps-4">
-              <h1>¿Dónde lo dan? Encuentra Dónde Verlo: Próximos Partidos de Fútbol en Canales y Plataformas de Streaming.</h1>
+              <h1 className="font-medium">¿Dónde lo dan? Encuentra Dónde Verlo: Próximos Partidos de Fútbol en Canales y Plataformas de Streaming.</h1>
               <a href="https://x.com/dondelodantv" target="_blank" rel="noreferrer">Twitter</a>
               <p>Contacto: hola@dondelodan.com</p>
               <p>©2023 dondelodan.com</p>
