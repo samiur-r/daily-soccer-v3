@@ -1,3 +1,5 @@
+// Automation for GitHub Actions.
+
 const axios = require('axios');
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
@@ -9,7 +11,7 @@ AWS.config.update({
 
 
 // ******************************* //
-// IDs de competiciones a filtrar //
+// Competition IDs to be filtered //
 const competitionIdsToFilter = [
     3312, // La Liga EA Sports
     3313, // LaLiga Hypermotion
@@ -21,6 +23,7 @@ const competitionIdsToFilter = [
 // ******************************* //
 // ******************************* //
 
+/* Clean channel names */
 function updateChannelName(data) {
     data.Channels.forEach(channel => {
         if (channel.Name === "Amazon Prime Video (Prueba gratis)") {
