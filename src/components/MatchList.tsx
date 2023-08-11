@@ -3,7 +3,6 @@
 import { MatchType } from "@/types/match";
 import React, { useState } from "react";
 import Card from "./Card";
-import { DateTime } from "luxon";
 
 interface MatchListProps {
   matches: MatchType[];
@@ -31,21 +30,24 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
   };
   
   const categorizeMatchesByDate = (matches: MatchType[]) => {
-    const today = DateTime.local().startOf("day");
-    const dayOfWeek = today.weekday;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayOfWeek = today.getDay() || 7; // Convertir domingo de 0 a 7
 
     const categorized = matches.reduce<Record<string, MatchType[]>>((acc, match) => {
-      const matchDate = DateTime.fromISO(match.Date).startOf("day");
-      const diffInDays = matchDate.diff(today, "days").days;
+      const matchDate = new Date(match.Date);
+      matchDate.setHours(0, 0, 0, 0);
+
+      const diffInDays = Math.round((matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
       let category;
       if (diffInDays === 0) {
         category = "Hoy";
       } else if (diffInDays === 1) {
         category = "Mañana";
-      } else if (diffInDays > 1 && diffInDays <= 7 - dayOfWeek) {
+      } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
         category = "Esta semana";
-      } else if (diffInDays > 7 - dayOfWeek && diffInDays <= 14 - dayOfWeek) {
+      } else if (diffInDays >= 7 - dayOfWeek + 1 && diffInDays < 14 - dayOfWeek + 1) {
         category = "Próxima semana";
       } else {
         category = "Más adelante";
@@ -58,6 +60,9 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
 
     return categorized;
   }
+
+
+  const categorizedMatches = categorizeMatchesByDate(matchList);
 
   return (
     <div className="flex-1 w-full max-w-5xl">
