@@ -15,22 +15,29 @@ const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <section className="flex shadow border bg-white mb-3">
       <div className="p-5 flex-1">
-        <time
-          className="flex justify-end text-xs md:text-base"
-          suppressHydrationWarning
-          dateTime={data.Date}
-        >
-          {formatDate(data.Date)}
-        </time>
-        <p className="text-sm md:text-lg font-normal">
-          {data.Competition.Name}
-          <Image
-            src={`/img/${data.Competition.Image}`}
-            width={32}
-            height={32}
-            alt={data.Competition.Name}
-          />
-        </p>
+        <div className="flex justify-between mb-4">
+          <div className="flex">
+            <Image
+              src={`/img/${data.Competition.Image}`}
+              width={32}
+              height={32}
+              alt={data.Competition.Name}
+              title={data.Competition.Name}
+              className="mr-2"
+            />
+            <span className="font-light text-xs md:text-lg">
+              {data.Competition.Name}
+            </span>
+          </div>
+          <time
+            className="flex justify-end text-xs md:text-base"
+            suppressHydrationWarning
+            dateTime={data.Date}
+            title={data.Date}
+          >
+            {formatDate(data.Date)}
+          </time>
+        </div>
         <div className="flex gap-3 text-2xl md:text-3xl font-bold">
           <div className="flex gap-2 items-center">
             {/* <Image src="/barcelona.png" width={30} height={30} alt="icon" /> */}
