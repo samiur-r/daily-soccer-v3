@@ -73,8 +73,9 @@ const CompetitionsData = {
         const filteredEvents = responseEvents.data.filter(item =>
             competitionIdsToFilter.includes(item.Competition.Id)
         );
-        filteredEvents.forEach(event => updateChannelName(event));
         filteredEvents.forEach(event => updateCompetitionImage(event));
+
+        filteredEvents.forEach(event => updateChannelName(event));
 
         const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
