@@ -75,7 +75,7 @@ const CompetitionsData = {
         );
         filteredEvents.forEach(event => updateChannelName(event));
         // filteredEvents.forEach(event => updateCompetitionImage(event));
-            console.log(event)
+        console.log(filteredEvents)
         const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
         var paramsEvents = {
