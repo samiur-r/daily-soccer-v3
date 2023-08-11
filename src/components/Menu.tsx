@@ -17,8 +17,8 @@ const Menu = () => (
             {navigation.map((item) => (
                 <li>
                     <a
-                        itemProp="url"
                         key={item.name}
+                        itemProp="url"
                         href={item.href}
                         className={classNames(
                             item.current ? 'bg-emerald-900 text-white' : 'text-gray-600 hover:bg-emerald-800 hover:text-white',
