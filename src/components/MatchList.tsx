@@ -3,6 +3,7 @@
 import { MatchType } from "@/types/match";
 import React, { useState } from "react";
 import Card from "./Card";
+import { DateTime } from "luxon";
 
 interface MatchListProps {
   matches: MatchType[];
@@ -21,18 +22,52 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
         `${process.env.NEXT_PUBLIC_DOMAIN}/api/matches?page=${currentPage + 1}`
       );
       const result = await res.json();
-      setMatchList([...matchList, ...result.matches]);
+      setMatchList((prevMatches) => [...prevMatches, ...result.matches]);
       setCurrentPage((prev) => prev + 1);
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
   };
+  
+  const categorizeMatchesByDate = (matches: MatchType[]) => {
+    const today = DateTime.local().startOf("day");
+    const dayOfWeek = today.weekday;
+
+    const categorized = matches.reduce<Record<string, MatchType[]>>((acc, match) => {
+      const matchDate = DateTime.fromISO(match.Date).startOf("day");
+      const diffInDays = matchDate.diff(today, "days").days;
+
+      let category;
+      if (diffInDays === 0) {
+        category = "Hoy";
+      } else if (diffInDays === 1) {
+        category = "Mañana";
+      } else if (diffInDays > 1 && diffInDays <= 7 - dayOfWeek) {
+        category = "Esta semana";
+      } else if (diffInDays > 7 - dayOfWeek && diffInDays <= 14 - dayOfWeek) {
+        category = "Próxima semana";
+      } else {
+        category = "Más adelante";
+      }
+
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(match);
+      return acc;
+    }, {});
+
+    return categorized;
+  }
 
   return (
     <div className="flex-1 w-full max-w-5xl">
-      {matchList.map((match: MatchType) => (
-        <Card key={match.Id} data={match} />
+      {Object.entries(categorizeMatchesByDate(matchList)).map(([date, dateMatches]) => (
+        <div key={date}>
+          <h1 className="text-xl font-bold mb-4">{date}</h1>
+          {dateMatches.map((match) => (
+            <Card key={match.Id} data={match} />
+          ))}
+        </div>
       ))}
       {matchList.length < totalItems && (
         <button
