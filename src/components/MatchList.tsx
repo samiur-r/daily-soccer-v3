@@ -61,14 +61,11 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
     return categorized;
   }
 
-
-  const categorizedMatches = categorizeMatchesByDate(matchList);
-
   return (
     <div className="flex-1 w-full max-w-5xl">
       {Object.entries(categorizeMatchesByDate(matchList)).map(([date, dateMatches]) => (
         <div key={date}>
-          <h1 className="text-xl font-bold mb-4">{date}</h1>
+          <p className="text-xl font-bold mb-4">{date}</p>
           {dateMatches.map((match) => (
             <Card key={match.Id} data={match} />
           ))}
