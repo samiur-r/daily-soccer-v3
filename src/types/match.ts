@@ -2,6 +2,7 @@ export interface MatchType {
   Id: string;
   Competition: {
     Name: string;
+    Image: string;
   };
   LocalTeam: {
     Name: string;

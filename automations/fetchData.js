@@ -38,6 +38,15 @@ function updateChannelName(data) {
     });
 }
 
+function updateCompetitionImage(data) {
+    data.Competition.forEach(competition => {
+        if (competition.Image === "20130727123206-espana.png") {
+            competition.Image = "laliga_espana.png";
+        }
+    });
+}
+
+
 const EventsData = {
     method: 'GET',
     url: 'https://wosti-futbol-tv-spain.p.rapidapi.com/api/Events',
@@ -65,6 +74,7 @@ const CompetitionsData = {
             competitionIdsToFilter.includes(item.Competition.Id)
         );
         filteredEvents.forEach(event => updateChannelName(event));
+        filteredEvents.forEach(event => updateCompetitionImage(event));
 
         const dataEvents = JSON.stringify(filteredEvents, null, 4);
 

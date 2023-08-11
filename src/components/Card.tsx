@@ -24,6 +24,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
         </time>
         <p className="text-sm md:text-lg font-normal">
           {data.Competition.Name}
+          <Image src={`/img/${data.Competition.Image}`} width={32} height={32} alt={data.Competition.Name} />
         </p>
         <div className="flex gap-3 text-2xl md:text-3xl font-bold">
           <div className="flex gap-2 items-center">
