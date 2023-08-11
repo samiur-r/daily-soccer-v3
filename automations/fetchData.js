@@ -39,7 +39,7 @@ function updateChannelName(data) {
 
 function changeCompetitionImage(data) {
   for (let item of data) {
-    if (item.Competition.Image === "20130727123206-espana.png") {
+      if (item.Competition.Id === 3312) {
       item.Competition.Image = "laliga_espana.png";
     }
   }
@@ -73,7 +73,7 @@ const CompetitionsData = {
     filteredEvents.forEach((event) => {
       updateChannelName(event);
     });
-      changeCompetitionImage(filteredEvents);
+    changeCompetitionImage(filteredEvents);
 
     const dataEvents = JSON.stringify(filteredEvents, null, 4);
 
