@@ -1,7 +1,6 @@
 name: Fetch Wosti data and Upload S3
 
 on:
-  push:
   schedule:
     # Run every 5 hours
     - cron: '0 */5 * * *'
