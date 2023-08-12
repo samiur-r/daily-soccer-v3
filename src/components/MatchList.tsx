@@ -6,10 +6,15 @@ import Card from "./Card";
 
 interface MatchListProps {
   matches: MatchType[];
+  competition_name?: string;
   totalItems: number;
 }
 
-const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
+const MatchList: React.FC<MatchListProps> = ({
+  matches,
+  competition_name,
+  totalItems,
+}) => {
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +22,16 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
   const fetchNextPage = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/matches?page=${currentPage + 1}`
-      );
+      const url = competition_name
+        ? `${
+            process.env.NEXT_PUBLIC_DOMAIN
+          }/api/competition?competition_name=competition_name&page=${
+            currentPage + 1
+          }`
+        : `${process.env.NEXT_PUBLIC_DOMAIN}/api/matches?page=${
+            currentPage + 1
+          }`;
+      const res = await fetch(url);
       const result = await res.json();
       setMatchList((prevMatches) => [...prevMatches, ...result.matches]);
       setCurrentPage((prev) => prev + 1);
@@ -28,52 +40,63 @@ const MatchList: React.FC<MatchListProps> = ({ matches, totalItems }) => {
     }
     setIsLoading(false);
   };
-  
+
   const categorizeMatchesByDate = (matches: MatchType[]) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const dayOfWeek = today.getDay() || 7; // Convertir domingo de 0 a 7
 
-    const categorized = matches.reduce<Record<string, MatchType[]>>((acc, match) => {
-      const matchDate = new Date(match.Date);
-      matchDate.setHours(0, 0, 0, 0);
+    const categorized = matches.reduce<Record<string, MatchType[]>>(
+      (acc, match) => {
+        const matchDate = new Date(match.Date);
+        matchDate.setHours(0, 0, 0, 0);
 
-      const diffInDays = Math.round((matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+        const diffInDays = Math.round(
+          (matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+        );
 
-      let category;
-      if (diffInDays === 0) {
-        category = "Hoy";
-      } else if (diffInDays === 1) {
-        category = "Mañana";
-      } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
-        category = "Esta semana";
-      } else if (diffInDays >= 7 - dayOfWeek + 1 && diffInDays < 14 - dayOfWeek + 1) {
-        category = "Próxima semana";
-      } else {
-        category = "Más adelante";
-      }
+        let category;
+        if (diffInDays === 0) {
+          category = "Hoy";
+        } else if (diffInDays === 1) {
+          category = "Mañana";
+        } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
+          category = "Esta semana";
+        } else if (
+          diffInDays >= 7 - dayOfWeek + 1 &&
+          diffInDays < 14 - dayOfWeek + 1
+        ) {
+          category = "Próxima semana";
+        } else {
+          category = "Más adelante";
+        }
 
-      if (!acc[category]) acc[category] = [];
-      acc[category].push(match);
-      return acc;
-    }, {});
+        if (!acc[category]) acc[category] = [];
+        acc[category].push(match);
+        return acc;
+      },
+      {}
+    );
 
     return categorized;
-  }
+  };
 
   return (
     <div className="flex-1 w-full max-w-5xl">
+      <h2 className="text-2xl lg:text-4xl font-bold">
+        Todos los partidos de fútbol
+      </h2>
 
-      <h2 className="text-2xl lg:text-4xl font-bold">Todos los partidos de fútbol</h2>
-
-      {Object.entries(categorizeMatchesByDate(matchList)).map(([date, dateMatches]) => (
-        <div key={date}>
-          <p className="text-md font-normal mb-2 mt-6">{date}</p>
-          {dateMatches.map((match) => (
-            <Card key={match.Id} data={match} />
-          ))}
-        </div>
-      ))}
+      {Object.entries(categorizeMatchesByDate(matchList)).map(
+        ([date, dateMatches]) => (
+          <div key={date}>
+            <p className="text-md font-normal mb-2 mt-6">{date}</p>
+            {dateMatches.map((match) => (
+              <Card key={match.Id} data={match} />
+            ))}
+          </div>
+        )
+      )}
       {matchList.length < totalItems && (
         <button
           className="w-full md:max-w-max w-100 mx-auto mt-5 flex gap-3 text-2xl justify-center items-center bg-emerald-800 hover:bg-emerald-700 text-white font-regular hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
