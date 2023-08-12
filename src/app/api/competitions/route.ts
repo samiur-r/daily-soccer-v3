@@ -1,9 +1,8 @@
-import { fetchMatches } from "@/services/macthes";
 import { headers } from "next/headers";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const page = searchParams.get("page") as string;
+  const competition = searchParams.get("competition") as string;
 
   const headersList = headers();
   const referer = headersList.get("referer");
@@ -19,8 +18,8 @@ export async function GET(req: Request) {
   }
 
   try {
-    const response = await fetchMatches(parseInt(page, 10));
-    return new Response(JSON.stringify(response), { status: 200 });
+
+    return new Response(JSON.stringify('response'), { status: 200 });
   } catch (error: any) {
     return new Response(error.message, { status: 500 });
   }

@@ -22,7 +22,7 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
             <li key={item.Id}>
               <a
                 itemProp="url"
-                href={`/futbol/campeonato/${item.Name}`}
+                href={`/futbol/campeonato/${item.Name.replace(/ /g, "_")}`}
                 // className={classNames(
                 //   item.current
                 //     ? "bg-emerald-900 text-white font-medium"
