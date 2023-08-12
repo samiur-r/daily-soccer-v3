@@ -2,7 +2,7 @@ import { MatchType } from "@/types/match";
 import { DateTime } from "luxon";
 
 const fetchMatches = async (page: number) => {
-  const res = await fetch(process.env.NEXT_PUBLIC_JSON_URL as string, {
+  const res = await fetch(process.env.NEXT_PUBLIC_MATCHES_URL as string, {
     next: {
       revalidate: 60,
     },
