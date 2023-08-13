@@ -43,7 +43,7 @@ function changeCompetitionImage(data) {
       item.Competition.Image = "la-liga-espana.png";
     }
     if (item.Competition.Id === 3313) {
-      item.Competition.Image = "la-liga-2espana.png";
+      item.Competition.Image = "la-liga-2-espana.png";
     }
     if (item.Competition.Id === 2) {
       item.Competition.Image = "premier-league.png";
