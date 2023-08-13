@@ -1,5 +1,5 @@
+import { fetchMatches } from "@/services/matches";
 import { headers } from "next/headers";
-import fetchMatches from "@/utils/fetchMatches";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
