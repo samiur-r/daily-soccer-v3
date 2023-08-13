@@ -31,4 +31,25 @@ const filterMatchesByCompetition = (
   return competitionMatches;
 };
 
-export { filterActiveMatches, filterMatchesByCompetition, isMatchFinished };
+const filterMatchesBySearchVal = (search: string, matches: MatchType[]): MatchType[] => {
+  const searchLower = search.toLowerCase();
+
+  const filteredMatches = matches.filter((match) => {
+    const { Name: localTeamName } = match.LocalTeam;
+    const { Name: awayTeamName } = match.AwayTeam;
+    const { Name: competitionName } = match.Competition;
+
+    return [localTeamName, awayTeamName, competitionName].some((name) =>
+      name.toLowerCase().includes(searchLower)
+    );
+  });
+
+  return filteredMatches;
+};
+
+export {
+  filterActiveMatches,
+  filterMatchesByCompetition,
+  isMatchFinished,
+  filterMatchesBySearchVal,
+};

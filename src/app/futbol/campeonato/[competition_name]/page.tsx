@@ -50,17 +50,13 @@ const CompetitionMatches = async ({
         <MatchList
           matches={matches}
           totalItems={totalItems}
-          competitionName={
-            competition ? competition.Name.replace(/_/g, " ") : null
-          }
-          competitionImage={competition ? competition.Image : null}
+          title={competition ? competition.Name.replace(/_/g, " ") : null}
+          titleImage={competition ? competition.Image : null}
         />
       </div>
       <div className="flex-initial w-72">
         <RightMenu
-          competitionName={
-            competition ? competition.Name.replace(/_/g, " ") : null
-          }
+          headline={competition ? competition.Name.replace(/_/g, " ") : null}
         />
       </div>
     </div>

@@ -10,16 +10,16 @@ interface MatchListProps {
   matches: MatchType[];
   competition_name?: string;
   totalItems: number;
-  competitionName?: string;
-  competitionImage?: string;
+  title?: string | null;
+  titleImage?: string;
 }
 
 const MatchList: React.FC<MatchListProps> = ({
   matches,
   competition_name,
   totalItems,
-  competitionName,
-  competitionImage,
+  title,
+  titleImage,
 }) => {
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
@@ -90,16 +90,16 @@ const MatchList: React.FC<MatchListProps> = ({
   return (
     <div className="flex-1 w-full max-w-5xl">
       <div className="flex gap-5 items-center">
-        {competitionImage && (
+        {titleImage && (
           <Image
-            src={`/img/${competitionImage}`}
+            src={`/img/${titleImage}`}
             alt="competition_name"
             width={70}
             height={70}
           />
         )}
         <h1 className="text-2xl lg:text-4xl font-bold">
-          {competitionName ? competitionName : "Todos los partidos de fútbol"}
+          {title ? title : "Todos los partidos de fútbol"}
         </h1>
       </div>
 

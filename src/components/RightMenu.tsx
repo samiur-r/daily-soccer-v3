@@ -4,18 +4,18 @@ import React from "react";
 // import useStore from "@/store";
 
 interface RightMenuProps {
-  competitionName?: string;
+  headline?: string | null;
 }
 
-const RightMenu: React.FC<RightMenuProps> = ({ competitionName }) => {
+const RightMenu: React.FC<RightMenuProps> = ({ headline }) => {
   //   const rightMenuContent = useStore((state) => state.rightMenuContent);
 
   return (
     <aside className="hidden xl:block sticky top-24">
       <div className="space-y-4 border-l-4 border-emerald-700 ps-4">
         <h1 className="font-medium">
-          {competitionName
-            ? competitionName
+          {headline
+            ? headline
             : "¿Dónde lo dan? Encuentra Dónde Verlo: Próximos Partidos de Fútbol en Canales y Plataformas de Streaming."}
         </h1>
         <a href="https://x.com/dondelodantv" target="_blank" rel="noreferrer">
