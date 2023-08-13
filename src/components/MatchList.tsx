@@ -1,19 +1,25 @@
 "use client";
 
-import { MatchType } from "@/types/match";
 import React, { useState } from "react";
+import Image from "next/image";
+
 import Card from "./Card";
+import { MatchType } from "@/types/match";
 
 interface MatchListProps {
   matches: MatchType[];
   competition_name?: string;
   totalItems: number;
+  competitionName?: string;
+  competitionImage?: string;
 }
 
 const MatchList: React.FC<MatchListProps> = ({
   matches,
   competition_name,
   totalItems,
+  competitionName,
+  competitionImage,
 }) => {
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,9 +89,19 @@ const MatchList: React.FC<MatchListProps> = ({
 
   return (
     <div className="flex-1 w-full max-w-5xl">
-      <h2 className="text-2xl lg:text-4xl font-bold">
-        Todos los partidos de fútbol
-      </h2>
+      <div className="flex gap-5 items-center">
+        {competitionImage && (
+          <Image
+            src={`/img/${competitionImage}`}
+            alt="competition_name"
+            width={70}
+            height={70}
+          />
+        )}
+        <h1 className="text-2xl lg:text-4xl font-bold">
+          {competitionName ? competitionName : "Todos los partidos de fútbol"}
+        </h1>
+      </div>
 
       {Object.entries(categorizeMatchesByDate(matchList)).map(
         ([date, dateMatches]) => (

@@ -1,6 +1,6 @@
 import MatchList from "@/components/MatchList";
-import { fetchMatches } from "@/services/macthes";
-
+import RightMenu from "@/components/RightMenu";
+import { fetchMatches } from "@/services/matches";
 
 const getMatches = async () => {
   try {
@@ -14,5 +14,14 @@ const getMatches = async () => {
 export default async function Home() {
   const { matches, totalItems }: any = await getMatches();
 
-  return <MatchList matches={matches} totalItems={totalItems} />;
+  return (
+    <div className="flex gap-7">
+      <div className="flex-1">
+        <MatchList matches={matches} totalItems={totalItems} />
+      </div>
+      <div className="flex-initial w-72">
+        <RightMenu />
+      </div>
+    </div>
+  );
 }

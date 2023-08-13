@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Roboto_Condensed } from "next/font/google";
 import Menu from "@/components/Menu";
 import { fetchCompetitions } from "@/services/competitions";
+import RightMenu from "@/components/RightMenu";
 
 const roboto_c = Roboto_Condensed({
   subsets: ["latin"],
@@ -88,24 +89,7 @@ export default async function RootLayout({
               <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
                 <Menu competitions={competitions} />
               </div>
-              <main className="lg:col-span-9 xl:col-span-7">{children}</main>
-              <aside className="hidden xl:col-span-3 xl:block">
-                <div className="sticky top-24 space-y-4 border-l-4 border-emerald-700 ps-4">
-                  <h1 className="font-medium">
-                    ¿Dónde lo dan? Encuentra Dónde Verlo: Próximos Partidos de
-                    Fútbol en Canales y Plataformas de Streaming.
-                  </h1>
-                  <a
-                    href="https://x.com/dondelodantv"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Twitter
-                  </a>
-                  <p>Contacto: hola@dondelodan.com</p>
-                  <p>©2023 dondelodan.com</p>
-                </div>
-              </aside>
+              <main className="lg:col-span-9 xl:col-span-10">{children}</main>
             </div>
           </div>
         </div>

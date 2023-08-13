@@ -1,4 +1,4 @@
-import { fetchMatches } from "@/services/macthes";
+import { fetchMatches } from "@/services/matches";
 import { headers } from "next/headers";
 
 export async function GET(req: Request) {

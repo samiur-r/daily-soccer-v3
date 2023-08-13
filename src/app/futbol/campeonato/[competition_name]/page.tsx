@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { fetchCompetitionMatches } from "@/services/macthes";
+
+import { fetchCompetitionMatches } from "@/services/matches";
 import MatchList from "@/components/MatchList";
+import { fetchCompetition } from "@/services/competitions";
+import RightMenu from "@/components/RightMenu";
 
 const getCompetitionMatches = async (competition_name: string) => {
   try {
@@ -37,7 +40,31 @@ const CompetitionMatches = async ({
   const { matches, totalItems }: any = await getCompetitionMatches(
     params.competition_name
   );
-  return <MatchList matches={matches} totalItems={totalItems} />;
+  const competition = await fetchCompetition(
+    params.competition_name.replace(/_/g, " ")
+  );
+
+  return (
+    <div className="flex gap-7">
+      <div className="flex-1">
+        <MatchList
+          matches={matches}
+          totalItems={totalItems}
+          competitionName={
+            competition ? competition.Name.replace(/_/g, " ") : null
+          }
+          competitionImage={competition ? competition.Image : null}
+        />
+      </div>
+      <div className="flex-initial w-72">
+        <RightMenu
+          competitionName={
+            competition ? competition.Name.replace(/_/g, " ") : null
+          }
+        />
+      </div>
+    </div>
+  );
 };
 
 export default CompetitionMatches;

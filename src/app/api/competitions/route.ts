@@ -1,4 +1,4 @@
-import { fetchCompetitionMatches } from "@/services/macthes";
+import { fetchCompetitionMatches } from "@/services/matches";
 import { headers } from "next/headers";
 
 export async function GET(req: Request) {
