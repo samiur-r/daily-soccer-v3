@@ -103,20 +103,17 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      {/* {Object.entries(categorizeMatchesByDate(matchList)).map(
+      {Object.entries(categorizeMatchesByDate(matchList)).map(
         ([date, dateMatches]) => (
-          <div key={date}>
-            <p className="text-md font-normal mb-2 mt-6">{date}</p>
-            {dateMatches.map((match) => (
-              <Card key={match.Id} data={match} />
-            ))}
-          </div>
+          // <div key={date}>
+          //   <p className="text-md font-normal mb-2 mt-6">{date}</p>
+          //   {dateMatches.map((match) => (
+          //     <Card key={match.Id} data={match} />
+          //   ))}
+          // </div>
+          <p>a</p>
         )
-      )} */}
-
-      {matchList.map((match) => (
-        <Card key={match.Id} data={match} />
-      ))}
+      )}
 
       {matchList.length < totalItems && (
         <button
