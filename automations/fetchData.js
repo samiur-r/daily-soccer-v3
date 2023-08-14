@@ -48,6 +48,12 @@ function changeCompetitionImage(data) {
     if (item.Competition.Id === 2) {
       item.Competition.Image = "premier-league.png";
     }
+    if (item.Competition.Id === 113) {
+      item.Competition.Image = "supercopa-europa.png";
+    }
+    if (item.Competition.Id === 122) {
+      item.Competition.Image = "supercopa-espana.png";
+    }
   }
 }
 
