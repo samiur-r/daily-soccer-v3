@@ -88,7 +88,7 @@ const MatchList: React.FC<MatchListProps> = ({
   };
 
   return (
-    <div className="flex-1 w-full max-w-5xl">
+    <div className="flex-1 w-full max-w-5xl" suppressHydrationWarning>
       <div className="flex gap-5 items-center">
         {titleImage && (
           <Image
@@ -105,8 +105,8 @@ const MatchList: React.FC<MatchListProps> = ({
 
       {Object.entries(categorizeMatchesByDate(matchList)).map(
         ([date, dateMatches]) => (
-          <div key={date} suppressHydrationWarning>
-            <p className="text-md font-normal mb-2 mt-6" suppressHydrationWarning>{date}</p>
+          <div key={date}>
+            <p className="text-md font-normal mb-2 mt-6">{date}</p>
             {dateMatches.map((match) => (
               <Card key={match.Id} data={match} />
             ))}
