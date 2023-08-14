@@ -6,6 +6,46 @@ import Image from "next/image";
 import Card from "./Card";
 import { MatchType } from "@/types/match";
 
+const categorizeMatchesByDate = (matches: MatchType[]) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dayOfWeek = today.getDay() || 7; // Convertir domingo de 0 a 7
+
+  const categorized = matches.reduce<Record<string, MatchType[]>>(
+    (acc, match) => {
+      const matchDate = new Date(match.Date);
+      matchDate.setHours(0, 0, 0, 0);
+
+      const diffInDays = Math.round(
+        (matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+      );
+
+      let category;
+      if (diffInDays === 0) {
+        category = "Hoy";
+      } else if (diffInDays === 1) {
+        category = "Mañana";
+      } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
+        category = "Esta semana";
+      } else if (
+        diffInDays >= 7 - dayOfWeek + 1 &&
+        diffInDays < 14 - dayOfWeek + 1
+      ) {
+        category = "Próxima semana";
+      } else {
+        category = "Más adelante";
+      }
+
+      if (!acc[category]) acc[category] = [];
+      acc[category].push(match);
+      return acc;
+    },
+    {}
+  );
+
+  return categorized;
+};
+
 interface MatchListProps {
   matches: MatchType[];
   competition_name?: string;
@@ -24,6 +64,16 @@ const MatchList: React.FC<MatchListProps> = ({
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [categorizedMatches, setCategorizedMatches] = useState(() =>
+    categorizeMatchesByDate(matchList)
+  );
+
+  useEffect(() => {
+    if (!isFirstRender)
+      setCategorizedMatches(categorizeMatchesByDate(matchList));
+    setIsFirstRender(false);
+  }, [matchList]);
 
   const fetchNextPage = async () => {
     setIsLoading(true);
@@ -47,46 +97,6 @@ const MatchList: React.FC<MatchListProps> = ({
     setIsLoading(false);
   };
 
-  const categorizeMatchesByDate = (matches: MatchType[]) => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const dayOfWeek = today.getDay() || 7; // Convertir domingo de 0 a 7
-
-    const categorized = matches.reduce<Record<string, MatchType[]>>(
-      (acc, match) => {
-        const matchDate = new Date(match.Date);
-        matchDate.setHours(0, 0, 0, 0);
-
-        const diffInDays = Math.round(
-          (matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-        );
-
-        let category;
-        if (diffInDays === 0) {
-          category = "Hoy";
-        } else if (diffInDays === 1) {
-          category = "Mañana";
-        } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
-          category = "Esta semana";
-        } else if (
-          diffInDays >= 7 - dayOfWeek + 1 &&
-          diffInDays < 14 - dayOfWeek + 1
-        ) {
-          category = "Próxima semana";
-        } else {
-          category = "Más adelante";
-        }
-
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(match);
-        return acc;
-      },
-      {}
-    );
-
-    return categorized;
-  };
-
   return (
     <div className="flex-1 w-full max-w-5xl">
       <div className="flex gap-5 items-center">
@@ -103,16 +113,19 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      {Object.entries(categorizeMatchesByDate(matchList)).map(
-        ([date, dateMatches]) => (
-          <div key={date} suppressHydrationWarning={true}>
-            <p className="text-md font-normal mb-2 mt-6" suppressHydrationWarning={true}>{date}</p>
-            {/* {dateMatches.map((match) => (
-              <Card key={match.Id} data={match} />
-            ))} */}
-          </div>
-        )
-      )}
+      {Object.entries(categorizedMatches).map(([date, dateMatches]) => (
+        <div key={date} suppressHydrationWarning={true}>
+          <p
+            className="text-md font-normal mb-2 mt-6"
+            suppressHydrationWarning={true}
+          >
+            {date}
+          </p>
+          {dateMatches.map((match) => (
+            <Card key={match.Id} data={match} />
+          ))}
+        </div>
+      ))}
 
       {matchList.length < totalItems && (
         <button
