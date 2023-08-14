@@ -13,7 +13,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ data }) => {
   return (
-    <section className="flex shadow border bg-white mb-3">
+    <section className="flex shadow border bg-white mb-3"  suppressHydrationWarning={true}>
       <div className="p-5 flex-1">
         <div className="flex justify-between mb-4">
           <div className="flex self-center">

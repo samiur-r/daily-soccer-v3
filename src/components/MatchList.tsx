@@ -24,11 +24,6 @@ const MatchList: React.FC<MatchListProps> = ({
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMounted, setHasMounted] = React.useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
 
   const fetchNextPage = async () => {
     setIsLoading(true);
@@ -104,23 +99,22 @@ const MatchList: React.FC<MatchListProps> = ({
           />
         )}
         <h1 className="text-2xl lg:text-4xl font-bold">
-          {title ? 'Partidos de ' + title : "Todos los partidos de fútbol"}
+          {title ? "Partidos de " + title : "Todos los partidos de fútbol"}
         </h1>
       </div>
 
-      {hasMounted &&
-        Object.entries(categorizeMatchesByDate(matchList)).map(
-          ([date, dateMatches]) => (
-            <div key={date}>
-              <p className="text-md font-normal mb-2 mt-6">{date}</p>
-              {dateMatches.map((match) => (
-                <Card key={match.Id} data={match} />
-              ))}
-            </div>
-          )
-        )}
+      {Object.entries(categorizeMatchesByDate(matchList)).map(
+        ([date, dateMatches]) => (
+          <div key={date} suppressHydrationWarning={true}>
+            <p className="text-md font-normal mb-2 mt-6">{date}</p>
+            {dateMatches.map((match) => (
+              <Card key={match.Id} data={match} />
+            ))}
+          </div>
+        )
+      )}
 
-      {hasMounted && matchList.length < totalItems && (
+      {matchList.length < totalItems && (
         <button
           className="w-full md:max-w-max w-100 mx-auto mt-5 flex gap-3 text-2xl justify-center items-center bg-emerald-800 hover:bg-emerald-700 text-white font-regular hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
           onClick={fetchNextPage}
