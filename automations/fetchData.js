@@ -21,7 +21,7 @@ const competitionIdsToFilter = [
   12, // Francie Ligue 1
   13, // Serie A Italiana
   25, // Primera División Argentina
-  1373, // FIFA Copa Mundial Femenina
+  1373 // FIFA Copa Mundial Femenina
 
 ];
 // ******************************* //
