@@ -89,7 +89,7 @@ export default async function RootLayout({
               <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
                 <Menu competitions={competitions} />
               </div>
-              <main className="lg:col-span-9 xl:col-span-10">{children}</main>
+              <main className="lg:col-span-9 xl:col-span-10" >{children}</main>
             </div>
           </div>
         </div>
