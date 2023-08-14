@@ -18,10 +18,10 @@ export default async function Home() {
     <div className="flex gap-7">
       {/* <div className="flex-1">
         <MatchList matches={matches} totalItems={totalItems} />
-      </div>
+      </div> */}
       <div className="flex-initial w-72 hidden xl:block">
         <RightMenu />
-      </div> */}
+      </div>
     </div>
   );
 }
