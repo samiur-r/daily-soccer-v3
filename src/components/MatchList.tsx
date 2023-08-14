@@ -105,20 +105,14 @@ const MatchList: React.FC<MatchListProps> = ({
 
       {Object.entries(categorizeMatchesByDate(matchList)).map(
         ([date, dateMatches]) => (
-          <div key={date} suppressHydrationWarning>
-            <p
-              className="text-md font-normal mb-2 mt-6"
-              suppressHydrationWarning
-            >
-              {date}
-            </p>
-            {/* {dateMatches.map((match) => (
-                <Card key={match.Id} data={match} />
-              ))} */}
+          <div key={date}>
+            <p className="text-md font-normal mb-2 mt-6">{date}</p>
+            {dateMatches.map((match) => (
+              <Card key={match.Id} data={match} />
+            ))}
           </div>
         )
       )}
-
       {matchList.length < totalItems && (
         <button
           className="w-full md:max-w-max w-100 mx-auto mt-5 flex gap-3 text-2xl justify-center items-center bg-emerald-800 hover:bg-emerald-700 text-white font-regular hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
