@@ -111,7 +111,7 @@ const MatchList: React.FC<MatchListProps> = ({
           //     <Card key={match.Id} data={match} />
           //   ))}
           // </div>
-          <p>a</p>
+          <p key={Math.random()}>a</p>
         )
       )}
 
