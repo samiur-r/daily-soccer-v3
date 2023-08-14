@@ -106,10 +106,10 @@ const MatchList: React.FC<MatchListProps> = ({
       {Object.entries(categorizeMatchesByDate(matchList)).map(
         ([date, dateMatches]) => (
           <div key={`${Math.random()}-${date}`}>
-            <p className="text-md font-normal mb-2 mt-6">{date}</p>
+            {/* <p className="text-md font-normal mb-2 mt-6">{date}</p>
             {dateMatches.map((match) => (
               <Card key={match.Id} data={match} />
-            ))}
+            ))} */}
           </div>
         )
       )}
