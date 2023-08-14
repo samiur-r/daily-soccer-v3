@@ -22,7 +22,7 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
   };
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/" || pathname.includes("/search")) {
       setActive(-1);
       return;
     }
@@ -66,7 +66,9 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
                     ? "bg-emerald-900 text-white font-medium"
                     : "text-gray-600 hover:bg-emerald-800 hover:text-white"
                 } group flex items-center px-3 py-2 text-md font-regular`}
-                // aria-current={item.current ? "page" : undefined}
+                aria-current={
+                  active === parseInt(item.Id, 10) ? "page" : undefined
+                }
               >
                 <span className="truncate">{item.Name}</span>
               </Link>

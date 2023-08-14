@@ -3,10 +3,11 @@ import type { Metadata } from "next";
 import { searchMatches } from "@/services/matches";
 import MatchList from "@/components/MatchList";
 import RightMenu from "@/components/RightMenu";
+import sanitizeUrl from "@/utils/sanitizeUrl";
 
 const filterMatchesBySearchValue = async (search_value: string) => {
   try {
-    const response = await searchMatches(search_value.replace(/_/g, " "), 1);
+    const response = await searchMatches(sanitizeUrl(search_value), 1);
     return response;
   } catch (error: any) {
     console.log(error);
@@ -44,14 +45,16 @@ const SearchedMatches = async ({
           matches={matches}
           totalItems={totalItems}
           title={
-            params.search_value ? `Results for ${params.search_value.replace(/_/g, " ")}` : null
+            params.search_value
+              ? `Results for ${sanitizeUrl(params.search_value)}`
+              : null
           }
         />
       </div>
       <div className="flex-initial w-72 hidden xl:block">
         <RightMenu
           headline={
-            params.search_value ? params.search_value.replace(/_/g, " ") : null
+            params.search_value ? sanitizeUrl(params.search_value) : null
           }
         />
       </div>
