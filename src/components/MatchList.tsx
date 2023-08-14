@@ -5,49 +5,11 @@ import Image from "next/image";
 
 import Card from "./Card";
 import { MatchType } from "@/types/match";
-
-const categorizeMatchesByDate = (matches: MatchType[]) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const dayOfWeek = today.getDay() || 7; // Convertir domingo de 0 a 7
-
-  const categorized = matches.reduce<Record<string, MatchType[]>>(
-    (acc, match) => {
-      const matchDate = new Date(match.Date);
-      matchDate.setHours(0, 0, 0, 0);
-
-      const diffInDays = Math.round(
-        (matchDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
-      );
-
-      let category;
-      if (diffInDays === 0) {
-        category = "Hoy";
-      } else if (diffInDays === 1) {
-        category = "Mañana";
-      } else if (diffInDays > 1 && diffInDays < 7 - dayOfWeek + 1) {
-        category = "Esta semana";
-      } else if (
-        diffInDays >= 7 - dayOfWeek + 1 &&
-        diffInDays < 14 - dayOfWeek + 1
-      ) {
-        category = "Próxima semana";
-      } else {
-        category = "Más adelante";
-      }
-
-      if (!acc[category]) acc[category] = [];
-      acc[category].push(match);
-      return acc;
-    },
-    {}
-  );
-
-  return categorized;
-};
+import { categorizeMatchesByDate } from "@/utils/matches";
 
 interface MatchListProps {
   matches: MatchType[];
+  categorizedMatches: any;
   competition_name?: string;
   totalItems: number;
   title?: string | null;
@@ -56,6 +18,7 @@ interface MatchListProps {
 
 const MatchList: React.FC<MatchListProps> = ({
   matches,
+  categorizedMatches,
   competition_name,
   totalItems,
   title,
@@ -65,13 +28,14 @@ const MatchList: React.FC<MatchListProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
-  const [categorizedMatches, setCategorizedMatches] = useState(() =>
-    Object.entries(categorizeMatchesByDate(matchList))
-  );
+  const [categorizedMatchList, setCategorizedMatchList] =
+    useState<any>(categorizedMatches);
 
   useEffect(() => {
     if (!isFirstRender)
-      setCategorizedMatches(Object.entries(categorizeMatchesByDate(matchList)));
+      setCategorizedMatchList(
+        Object.entries(categorizeMatchesByDate(matchList))
+      );
     setIsFirstRender(false);
   }, [matchList]);
 
@@ -113,19 +77,15 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      {categorizedMatches.map((data) => (
-        <div key={data[0]} suppressHydrationWarning>
-          <p
-            className="text-md font-normal mb-2 mt-6"
-            suppressHydrationWarning
-          >
-            {data[0]}
-          </p>
-          {/* {data[1].map((match) => (
-            <Card key={match.Id} data={match} />
-          ))} */}
-        </div>
-      ))}
+      {categorizedMatchList &&
+        categorizedMatchList.map((data: any) => (
+          <div key={data[0]}>
+            <p className="text-md font-normal mb-2 mt-6">{data[0]}</p>
+            {data[1].map((match: MatchType) => (
+              <Card key={match.Id} data={match} />
+            ))}
+          </div>
+        ))}
 
       {matchList.length < totalItems && (
         <button

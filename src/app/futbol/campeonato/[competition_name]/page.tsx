@@ -4,14 +4,16 @@ import { fetchCompetitionMatches } from "@/services/matches";
 import MatchList from "@/components/MatchList";
 import { fetchCompetition } from "@/services/competitions";
 import RightMenu from "@/components/RightMenu";
+import { categorizeMatchesByDate } from "@/utils/matches";
 
 const getCompetitionMatches = async (competition_name: string) => {
   try {
-    const response = await fetchCompetitionMatches(
+    const { matches, totalItems } = await fetchCompetitionMatches(
       competition_name.replace(/_/g, " "),
       1
     );
-    return response;
+    const categorizedMatches = Object.entries(categorizeMatchesByDate(matches));
+    return { matches, totalItems, categorizedMatches };
   } catch (error: any) {
     console.log(error);
   }
@@ -37,7 +39,7 @@ const CompetitionMatches = async ({
 }: {
   params: { competition_name: string };
 }) => {
-  const { matches, totalItems }: any = await getCompetitionMatches(
+  const { matches, totalItems, categorizedMatches }: any = await getCompetitionMatches(
     params.competition_name
   );
   const competition = await fetchCompetition(
@@ -50,6 +52,7 @@ const CompetitionMatches = async ({
         <MatchList
           matches={matches}
           totalItems={totalItems}
+          categorizedMatches={categorizedMatches}
           title={competition ? competition.Name.replace(/_/g, " ") : null}
           titleImage={competition ? competition.Image : null}
         />

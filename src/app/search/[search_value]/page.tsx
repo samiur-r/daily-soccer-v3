@@ -4,11 +4,16 @@ import { searchMatches } from "@/services/matches";
 import MatchList from "@/components/MatchList";
 import RightMenu from "@/components/RightMenu";
 import sanitizeUrl from "@/utils/sanitizeUrl";
+import { categorizeMatchesByDate } from "@/utils/matches";
 
 const filterMatchesBySearchValue = async (search_value: string) => {
   try {
-    const response = await searchMatches(sanitizeUrl(search_value), 1);
-    return response;
+    const { matches, totalItems } = await searchMatches(
+      sanitizeUrl(search_value),
+      1
+    );
+    const categorizedMatches = Object.entries(categorizeMatchesByDate(matches));
+    return { matches, totalItems, categorizedMatches };
   } catch (error: any) {
     console.log(error);
   }
@@ -34,9 +39,8 @@ const SearchedMatches = async ({
 }: {
   params: { search_value: string };
 }) => {
-  const { matches, totalItems }: any = await filterMatchesBySearchValue(
-    params.search_value
-  );
+  const { matches, totalItems, categorizedMatches }: any =
+    await filterMatchesBySearchValue(params.search_value);
 
   return (
     <div className="flex gap-7">
@@ -44,6 +48,7 @@ const SearchedMatches = async ({
         <MatchList
           matches={matches}
           totalItems={totalItems}
+          categorizedMatches={categorizedMatches}
           title={
             params.search_value
               ? `Results for ${sanitizeUrl(params.search_value)}`
