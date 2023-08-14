@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
 import Card from "./Card";
@@ -24,6 +24,11 @@ const MatchList: React.FC<MatchListProps> = ({
   const [matchList, setMatchList] = useState(matches);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [hasMounted, setHasMounted] = React.useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
 
   const fetchNextPage = async () => {
     setIsLoading(true);
@@ -103,17 +108,17 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      {Object.entries(categorizeMatchesByDate(matchList)).map(
-        ([date, dateMatches]) => (
-          // <div key={date}>
-          //   <p className="text-md font-normal mb-2 mt-6">{date}</p>
-          //   {dateMatches.map((match) => (
-          //     <Card key={match.Id} data={match} />
-          //   ))}
-          // </div>
-          <p key={Math.random()}>a</p>
-        )
-      )}
+      {hasMounted &&
+        Object.entries(categorizeMatchesByDate(matchList)).map(
+          ([date, dateMatches]) => (
+            <div key={date}>
+              <p className="text-md font-normal mb-2 mt-6">{date}</p>
+              {dateMatches.map((match) => (
+                <Card key={match.Id} data={match} />
+              ))}
+            </div>
+          )
+        )}
 
       {matchList.length < totalItems && (
         <button
