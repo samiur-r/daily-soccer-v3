@@ -104,7 +104,7 @@ const MatchList: React.FC<MatchListProps> = ({
           />
         )}
         <h1 className="text-2xl lg:text-4xl font-bold">
-          {title ? title : "Todos los partidos de fútbol"}
+          {title ? 'Partidos de ' + title : "Todos los partidos de fútbol"}
         </h1>
       </div>
 

@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({ data }) => {
     <section className="flex shadow border bg-white mb-3">
       <div className="p-5 flex-1">
         <div className="flex justify-between mb-4">
-          <div className="flex">
+          <div className="flex self-center">
             <Image
               src={`/img/${data.Competition.Image}`}
               width={32}
@@ -29,14 +29,17 @@ const Card: React.FC<CardProps> = ({ data }) => {
               {data.Competition.Name}
             </span>
           </div>
-          <time
-            className="flex justify-end text-xs md:text-base"
-            suppressHydrationWarning
-            dateTime={data.Date}
-            title={data.Date}
-          >
-            {formatDate(data.Date)}
-          </time>
+          <div className="bg-white hover:bg-gray-100 text-gray-800 py-2 px-4 border border-gray-400 rounded">
+            <time
+              className="flex justify-end text-xs md:text-base"
+              suppressHydrationWarning
+              dateTime={data.Date}
+              title={data.Date}
+            >
+              {formatDate(data.Date)}
+            </time>
+          </div>
+
         </div>
         <div className="flex gap-3 text-2xl md:text-3xl font-bold">
           <div className="flex gap-2 items-center">
@@ -69,9 +72,8 @@ const Card: React.FC<CardProps> = ({ data }) => {
         />
         <meta
           itemProp="description"
-          content={`Partido de fútbol entre ${data.LocalTeam.Name} - ${
-            data.AwayTeam.Name
-          } - ${formatDate(data.Date)} por ${data.Competition.Name}`}
+          content={`Partido de fútbol entre ${data.LocalTeam.Name} - ${data.AwayTeam.Name
+            } - ${formatDate(data.Date)} por ${data.Competition.Name}`}
         />
         <meta itemProp="url" content="https://www.dondelodan.com/" />
         <meta itemProp="startDate" content={data.Date} />
