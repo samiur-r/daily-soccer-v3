@@ -87,9 +87,9 @@ export default async function RootLayout({
           <div className="py-6 bg-gray-200">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
               <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
-                {/* <Menu competitions={competitions} /> */}
+                <Menu competitions={competitions} />
               </div>
-              <main className="lg:col-span-9 xl:col-span-10">{children}</main>
+              {/* <main className="lg:col-span-9 xl:col-span-10">{children}</main> */}
             </div>
           </div>
         </div>
