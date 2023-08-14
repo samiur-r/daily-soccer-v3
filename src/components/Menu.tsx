@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 
 import { CompetitionType } from "@/types/competition";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface MenuProps {
   competitions: CompetitionType[];
@@ -42,7 +43,7 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
     >
       <ul>
         <li>
-          <a
+          <Link
             itemProp="url"
             href="/"
             className={`${
@@ -52,12 +53,12 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
             } group flex items-center px-3 py-2 text-md font-regular`}
           >
             Todo
-          </a>
+          </Link>
         </li>
         {competitions &&
           competitions.map((item) => (
             <li key={item.Id}>
-              <a
+              <Link
                 itemProp="url"
                 href={`/futbol/campeonato/${item.Name.replace(/ /g, "_")}`}
                 className={`${
@@ -68,7 +69,7 @@ const Menu: React.FC<MenuProps> = ({ competitions }) => {
                 // aria-current={item.current ? "page" : undefined}
               >
                 <span className="truncate">{item.Name}</span>
-              </a>
+              </Link>
             </li>
           ))}
       </ul>
