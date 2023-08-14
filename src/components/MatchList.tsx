@@ -114,11 +114,16 @@ const MatchList: React.FC<MatchListProps> = ({
       </div>
 
       {categorizedMatches.map((data) => (
-        <div key={data[0]}>
-          <p className="text-md font-normal mb-2 mt-6">{data[0]}</p>
-          {data[1].map((match) => (
+        <div key={data[0]} suppressHydrationWarning>
+          <p
+            className="text-md font-normal mb-2 mt-6"
+            suppressHydrationWarning
+          >
+            {data[0]}
+          </p>
+          {/* {data[1].map((match) => (
             <Card key={match.Id} data={match} />
-          ))}
+          ))} */}
         </div>
       ))}
 
