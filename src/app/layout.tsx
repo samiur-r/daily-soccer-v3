@@ -83,7 +83,7 @@ export default async function RootLayout({
       </head>
       <body className={roboto_c.className}>
         <div className="min-h-screen bg-gray-100">
-          <Header />
+          {/* <Header /> */}
           <div className="py-6 bg-gray-200">
             <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
               <div className="hidden lg:col-span-3 lg:block xl:col-span-2">
