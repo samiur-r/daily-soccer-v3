@@ -48,7 +48,7 @@ const SearchedMatches = async ({
           }
         />
       </div>
-      <div className="flex-initial w-72">
+      <div className="flex-initial w-72 hidden xl:block">
         <RightMenu
           headline={
             params.search_value ? params.search_value.replace(/_/g, " ") : null

@@ -19,7 +19,7 @@ export default async function Home() {
       <div className="flex-1">
         <MatchList matches={matches} totalItems={totalItems} />
       </div>
-      <div className="flex-initial w-72">
+      <div className="flex-initial w-72 hidden xl:block">
         <RightMenu />
       </div>
     </div>

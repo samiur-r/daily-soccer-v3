@@ -11,7 +11,7 @@ const RightMenu: React.FC<RightMenuProps> = ({ headline }) => {
   //   const rightMenuContent = useStore((state) => state.rightMenuContent);
 
   return (
-    <aside className="hidden xl:block sticky top-24">
+    <aside className="sticky top-24">
       <div className="space-y-4 border-l-4 border-emerald-700 ps-4">
         <h1 className="font-medium">
           {headline

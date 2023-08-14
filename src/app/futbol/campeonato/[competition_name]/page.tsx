@@ -54,7 +54,7 @@ const CompetitionMatches = async ({
           titleImage={competition ? competition.Image : null}
         />
       </div>
-      <div className="flex-initial w-72">
+      <div className="flex-initial w-72 hidden xl:block">
         <RightMenu
           headline={competition ? competition.Name.replace(/_/g, " ") : null}
         />
