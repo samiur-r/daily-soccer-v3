@@ -66,12 +66,12 @@ const MatchList: React.FC<MatchListProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const [categorizedMatches, setCategorizedMatches] = useState(() =>
-    categorizeMatchesByDate(matchList)
+    Object.entries(categorizeMatchesByDate(matchList))
   );
 
   useEffect(() => {
     if (!isFirstRender)
-      setCategorizedMatches(categorizeMatchesByDate(matchList));
+      setCategorizedMatches(Object.entries(categorizeMatchesByDate(matchList)));
     setIsFirstRender(false);
   }, [matchList]);
 
@@ -113,15 +113,10 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      {Object.entries(categorizedMatches).map(([date, dateMatches]) => (
-        <div key={date} suppressHydrationWarning={true}>
-          <p
-            className="text-md font-normal mb-2 mt-6"
-            suppressHydrationWarning={true}
-          >
-            {date}
-          </p>
-          {dateMatches.map((match) => (
+      {categorizedMatches.map((data) => (
+        <div key={data[0]}>
+          <p className="text-md font-normal mb-2 mt-6">{data[0]}</p>
+          {data[1].map((match) => (
             <Card key={match.Id} data={match} />
           ))}
         </div>
