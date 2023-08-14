@@ -103,18 +103,21 @@ const MatchList: React.FC<MatchListProps> = ({
         </h1>
       </div>
 
-      <div suppressHydrationWarning>
-        {Object.entries(categorizeMatchesByDate(matchList)).map(
-          ([date, dateMatches]) => (
-            <div key={date}>
-              <p className="text-md font-normal mb-2 mt-6">{date}</p>
-              {dateMatches.map((match) => (
+      {Object.entries(categorizeMatchesByDate(matchList)).map(
+        ([date, dateMatches]) => (
+          <div key={date} suppressHydrationWarning>
+            <p
+              className="text-md font-normal mb-2 mt-6"
+              suppressHydrationWarning
+            >
+              {date}
+            </p>
+            {/* {dateMatches.map((match) => (
                 <Card key={match.Id} data={match} />
-              ))}
-            </div>
-          )
-        )}
-      </div>
+              ))} */}
+          </div>
+        )
+      )}
 
       {matchList.length < totalItems && (
         <button
