@@ -120,7 +120,7 @@ const MatchList: React.FC<MatchListProps> = ({
           )
         )}
 
-      {matchList.length < totalItems && (
+      {hasMounted && matchList.length < totalItems && (
         <button
           className="w-full md:max-w-max w-100 mx-auto mt-5 flex gap-3 text-2xl justify-center items-center bg-emerald-800 hover:bg-emerald-700 text-white font-regular hover:text-white py-2 px-4 border border-emerald-800 hover:border-transparent rounded"
           onClick={fetchNextPage}
